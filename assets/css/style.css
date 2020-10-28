@@ -1,0 +1,17 @@
+.col {
+    text-align: center;
+}
+
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
+
+/* MEDIA QUERY FOR TABLETS AND SMALLER */
+
+/* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
+@media screen and (max-width: 575px) {
+    #welcome h1 {
+        font-size: 30px;
+    }
+    #read-or-play h2 {
+        font-size: 25px;
+    }
+}

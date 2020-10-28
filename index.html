@@ -3,6 +3,7 @@
 <head>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,22 +13,27 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col s12">
-                <h1>Welcome to The Living Room</h1>
+            <div class="col s12" id="welcome">
+                <h1>Welcome to <br />
+                    The Living Room</h1>
             </div>
         </div>
         <div class="row">
-            <div class="col s12">
-                <h2>Would you like to read or play?</h2>
+            <div class="col s12" id="read-or-play">
+                <h2>Would you like to <br />
+                    READ or PLAY?</h2>
             </div>
         </div>
-        <div class="row">
-            <div class="col s6">
+        <div class="row" id="buttons">
+            <div class="col s6" id="read-cell">
                 <button>Read</button>
             </div>
-            <div class="col s6">
+            <div class="col s6" id="play-cell">
                 <button>Play</button>
             </div>
+        </div>
+        <div class="row">
+            <div class="col s12" id="content-cell"></div>
         </div>
     </div>
 </body>

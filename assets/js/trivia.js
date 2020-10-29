@@ -47,7 +47,6 @@ var showQuiz = function (trivia) {
 
 var answserQuiz = function () {
     var correctButton = document.getElementById("answer1")
-    var incorrectButton = document.querySelector(".incorrect")
     var nextButton = document.getElementById("nextQuestion")
 
     correctButton.addEventListener("click", function () {
@@ -56,10 +55,25 @@ var answserQuiz = function () {
 
     })
 
-    incorrectButton.addEventListener("click", function () {
-        document.getElementById("answerStatus").innerHTML = "Nope!  That's not correct"
-        document.getElementById("nextQuestion").style = "display:block"
-    })
+
+    document.querySelectorAll(".incorrect").forEach((item) => {
+        item.addEventListener("click", (event) => {
+            console.time("more");
+            event.preventDefault();
+            document.getElementById("answerStatus").innerHTML = "Nope!  That's not correct"
+            document.getElementById("nextQuestion").style = "display:block"
+            console.log("yay!")
+            //   element.scrollIntoView();
+            //   console.timeEnd("more");
+        });
+    });
+
+
+
+    // incorrectButton.addEventListener("click", function () {
+    //     document.getElementById("answerStatus").innerHTML = "Nope!  That's not correct"
+    //     document.getElementById("nextQuestion").style = "display:block"
+    // })
 
     nextButton.addEventListener("click", function () {
         document.getElementById("nextQuestion").style = "display:none"

@@ -25,11 +25,11 @@ var playTrivia = function () {
             }
         })
         .catch(function (error) {
-            document.querySelector(".error").textContent = "Unable to connect to Open Trivia Database";
-            document.querySelector(".status").style = "display: block";
-            setTimeout(function () {
-                document.querySelector(".status").style = "display: none";
-            }, 2000);
+            // document.querySelector(".error").textContent = "Unable to connect to Open Trivia Database";
+            // document.querySelector(".status").style = "display: block";
+            // setTimeout(function () {
+            //     document.querySelector(".status").style = "display: none";
+            // }, 2000);
         });
 }
 
@@ -49,33 +49,29 @@ var answserQuiz = function () {
     var correctButton = document.getElementById("answer1")
     var nextButton = document.getElementById("nextQuestion")
 
-    correctButton.addEventListener("click", function () {
+    correctButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        console.log("correct");
+        score = score + 5
+        document.getElementById("score").innerHTML = "Your score is " + score
         document.getElementById("answerStatus").innerHTML = "Correct! Way to Go!"
-        showScore()
-
+        document.querySelectorAll(".answer").style = "display:none"
+        quizStatus()
     })
-
 
     document.querySelectorAll(".incorrect").forEach((item) => {
         item.addEventListener("click", (event) => {
-            console.time("more");
+            console.log("incorrect");
             event.preventDefault();
-            document.getElementById("answerStatus").innerHTML = "Nope!  That's not correct"
-            document.getElementById("nextQuestion").style = "display:block"
-            console.log("yay!")
-            //   element.scrollIntoView();
-            //   console.timeEnd("more");
+            document.getElementById("answerStatus").innerHTML = "Nope!  That's not correct. The correct answer is " + trivia.results[0].correct_answer
+            document.querySelectorAll(".answer").style = "display:none"
+            console.log("boo!")
+            quizStatus()
         });
     });
 
-
-
-    // incorrectButton.addEventListener("click", function () {
-    //     document.getElementById("answerStatus").innerHTML = "Nope!  That's not correct"
-    //     document.getElementById("nextQuestion").style = "display:block"
-    // })
-
-    nextButton.addEventListener("click", function () {
+    nextButton.addEventListener("click", function (event) {
+        event.preventDefault()
         document.getElementById("nextQuestion").style = "display:none"
         clearContent()
         playTrivia()
@@ -86,10 +82,8 @@ var clearContent = function () {
     displayStatus.innerHTML = ""
 };
 
-function showScore() {
+function quizStatus() {
 
-    score = score + 5
-    document.getElementById("score").innerHTML = "Your score is " + score
     currentQuestion++
     if (currentQuestion < 9) {
         document.getElementById("nextQuestion").style = "display:block"
@@ -98,7 +92,6 @@ function showScore() {
         document.getElementById("nextQuestion").style = "display:none"
         document.getElementById("gameStatus").innerHTML = "All done!"
     }
-
 };
 
 

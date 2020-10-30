@@ -42,57 +42,81 @@ var showQuiz = function (trivia) {
     document.getElementById("difficulty").innerHTML = "Difficulty:" + trivia.results[0].difficulty
     document.getElementById("question").innerHTML = "Question:" + trivia.results[0].question
 
+    var pointer = 0;
 
-    document.getElementById("answer1").style = "display:inline"
-    document.getElementById("answer1").innerHTML = trivia.results[0].correct_answer
+    var random = (Math.floor(Math.random * 4) + 1) //correct_answer
 
-    document.getElementById("answer2").style = "display:inline"
-    document.getElementById("answer2").innerHTML = trivia.results[0].incorrect_answers[0]
+    for (var index = 1; index < 5; index++) {
+        if (index === random) {
+            document.getElementById("answer" + index).style = "display:inline";
+            document.getElementById("answer" + index).innerHTML = trivia.results[0].correct_answer;
 
-    document.getElementById("answer3").style = "display:inline"
-    document.getElementById("answer3").innerHTML = trivia.results[0].incorrect_answers[1]
+        } else {
+            document.getElementById("answer" + index).style = "display:inline";
+            document.getElementById("answer" + index).innerHTML = trivia.results[0].incorrect_answers[pointer];
+            pointer++;
+        }
+    }
 
-    document.getElementById("answer4").style = "display:inline"
-    document.getElementById("answer4").innerHTML = trivia.results[0].incorrect_answers[2]
+    document.querySelectorAll("answer").forEach((item) => {
+        //remove listener
+        item.addEventListener("click", (event) => {
+            event.preventDefault();
+            //check if item innerHTML is correct
 
-    // debugger;
-    var correctButton = document.getElementById("answer1")
-    var incorrect1 = document.getElementById("answer2")
-    var incorrect2 = document.getElementById("answer3")
-    var incorrect3 = document.getElementById("answer4")
+            document.getElementById("answerStatus").innerHTML = "Nope! That's not correct. The correct answer is " + trivia.results[0].correct_answer;
+            gameStatus();
+        });
+    });
 
 
-    correctButton.addEventListener("click", function (event) {
-        event.preventDefault();
-        document.getElementById("answerStatus").innerHTML = "Way to Go! Yes, the correct answer is " + trivia.results[0].correct_answer
-        console.log("correct");
-        var correct = true
-        quizStatus(correct)
-    })
+    // document.getElementsByClassName("correct")
+    //     .addEventListener("click", function (event) {
+    //         console.log(score);
+    //         event.preventDefault();
+    //         document.getElementById("answerStatus").innerHTML = "Way to Go! Yes, the correct answer is " + trivia.results[0].correct_answer
+    //         console.log("correct");
+    //         var correct = true
+    //         quizStatus(correct)
+    //     })
 
-    incorrect1.addEventListener("click", function (event) {
-        event.preventDefault();
-        console.log("incorrect1");
-        event.preventDefault();
-        document.getElementById("answerStatus").innerHTML = "Nope! That's not correct. The correct answer is " + trivia.results[0].correct_answer
-        gameStatus()
-    })
+    // document.getElementsByClassName(".incorrect").forEach((item) => {
+    //     item.addEventListener("click", (event) => {
+    //         console.log("incorrect");
+    //         event.preventDefault();
+    //         document.getElementById("answerStatus").innerHTML = "Nope! That's not correct. The correct answer is " + trivia.results[0].correct_answer
+    //         gameStatus()
 
-    incorrect2.addEventListener("click", function (event) {
-        event.preventDefault();
-        console.log("incorrect2");
-        event.preventDefault();
-        document.getElementById("answerStatus").innerHTML = "Nope! That's not correct. The correct answer is " + trivia.results[0].correct_answer
-        gameStatus()
-    })
+    //     });
+    // });
 
-    incorrect3.addEventListener("click", function (event) {
-        event.preventDefault();
-        console.log("incorrect3");
-        event.preventDefault();
-        document.getElementById("answerStatus").innerHTML = "Nope! That's not correct. The correct answer is " + trivia.results[0].correct_answer
-        gameStatus()
-    })
+
+
+    // incorrect1.addEventListener("click", function (event) {
+    //     event.preventDefault();
+    //     console.log("incorrect1");
+    //     event.preventDefault();
+    //     document.getElementById("answerStatus").innerHTML = "Nope! That's not correct. The correct answer is " + trivia.results[0].correct_answer
+    //     gameStatus()
+    // })
+
+    // incorrect2.addEventListener("click", function (event) {
+    //     event.preventDefault();
+    //     console.log("incorrect2");
+    //     event.preventDefault();
+    //     document.getElementById("answerStatus").innerHTML = "Nope! That's not correct. The correct answer is " + trivia.results[0].correct_answer
+    //     gameStatus()
+    // })
+
+    // incorrect3.addEventListener("click", function (event) {
+    //     event.preventDefault();
+    //     console.log("incorrect3");
+    //     event.preventDefault();
+    //     document.getElementById("answerStatus").innerHTML = "Nope! That's not correct. The correct answer is " + trivia.results[0].correct_answer
+    //     gameStatus()
+    // })
+
+    // document.getElementById("myDIV").removeEventListener("mousemove", myFunction);
 
 }
 
@@ -120,6 +144,7 @@ var gameStatus = function () {
         document.getElementById("answer3").style = "display:none"
         document.getElementById("answer4").style = "display:none"
         document.getElementById("nextQuestion").style = "display:block"
+
 
     } else {
         console.log("You've finished!")

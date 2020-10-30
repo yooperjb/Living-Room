@@ -20,3 +20,7 @@ h1 {
     text-shadow: 0 10px 50px rgb(0, 0, 0);
     color: white;
 }
+
+#content-cell {
+    min-height: 0;
+}

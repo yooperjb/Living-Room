@@ -1,6 +1,7 @@
 //var highScores = JSON.parse(localStorage.getItem("highScores")) || []
 var displayStatus = document.getElementById("answerStatus")
 var nextButton = document.getElementById("nextQuestion")
+var quizQuestions = document.querySelectorAll(".astyle")
 var currentQuestion = 0
 var score = 0
 var choice = document.querySelector(".answer")
@@ -65,45 +66,67 @@ var showQuiz = function (trivia) {
             pointer++;
         }
     }
-    debugger;
+    // debugger;
     // document.getElementById("myDIV").removeEventListener("mousemove", myFunction);
 
     console.log(correctHTML)
 
+
+
+    // document.querySelector(".answer").innerHTML
     document.querySelectorAll(".answer").forEach(function (item) {
-        //item.removeEventListener("click",);
-        item.addEventListener("click", function () {
-            if (trivia.results[0].correct_answer === document.querySelector(".answer").innerHTML) {
-                document.getElementById("answerStatus").innerHTML = "Way to Go! Yes, the correct answer is " + trivia.results[0].correct_answer
+
+        item.addEventListener("click", function handler() {
+            // this.removeEventListener('click', handler);
+
+            if (correctHTML === document.querySelectorAll(".answer").innerHTML) {
+                astyle.style = "display:none"
+                document.getElementById("answerStatus").innerHTML = "Way to Go! Yes, the correct answer is " + correctHTML
                 console.log("correct");
-                score += 1
-                console.log(score)
-                document.getElementById("score").innerHTML = "Your score is " + score
-                gameStatus()
+                var correct = true
+                gameStatus(correct)
+
             }
             else {
-                document.getElementById("answerStatus").innerHTML = "Nope! That's not correct. The correct answer is " + trivia.results[0].correct_answer;
+                document.getElementById("answerStatus").innerHTML = "Nope! That's not correct. The correct answer is " + correctHTML;
+
+                console.log("incorrect");
                 document.getElementById("score").innerHTML = "Your score is " + score
-                gameStatus();
+
+
+                gameStatus()
+
             }
+
         })
     });
 }
 
 
-var gameStatus = function () {
+var gameStatus = function (correct) {
+    if (correct) {
+        score += 1
+        console.log(score)
+        document.getElementById("score").innerHTML = "Your score is " + score
+    } else {
+        score = score
+        console.log(score)
+        document.getElementById("score").innerHTML = "Your score is " + score
+    }
+
     currentQuestion += 1
     console.log(currentQuestion)
     if (currentQuestion <= 10) {
         console.log(currentQuestion)
-        document.querySelectorAll(".answer").style = "display:none"
+        quizQuestions.style = "display:none"
         document.getElementById("nextQuestion").style = "display:block"
 
 
     } else {
+        console.log(currentQuestion)
         console.log("You've finished!")
         document.getElementById("nextQuestion").style = "display:none"
-        document.querySelectorAll(".answer").style = "display:none"
+        quizQuestions.style = "display:none"
         document.getElementById("gameStatus").innerHTML = "All done!"
     }
 };
@@ -111,12 +134,15 @@ var gameStatus = function () {
 nextButton.addEventListener("click", function (event) {
     event.preventDefault()
     document.getElementById("nextQuestion").style = "display:none"
+
     clearContent()
     playTrivia()
 })
 
 var clearContent = function () {
     displayStatus.innerHTML = ""
+
+
 };
 
 

@@ -10,11 +10,11 @@ This is the results from our group project for UC Berekley Bootcamp. The require
 The concept of the project is to provide options for bored individuals, similar to pulling out a box of activities in a cozy living room. Put your feet up, sit by the fireplace, and choose between reading a random book on the Gutenberg Project, test your trivia skills, or laugh at random jokes - all with just the click of a button. 
 
 ## Features
-The Living Room utilizes three unique server-side APIs. The first uses Gutendex which is a JSON web API for Project Gutenberg, a library of over 60,000 free eBooks. The second is (), a trivia API. Last is (), a joke API.
+The Living Room utilizes three unique server-side APIs. The first uses Gutendex which is a JSON web API for Project Gutenberg, a library of over 60,000 free eBooks. The second is Open Trivia DB, a trivia API. Last is (), a joke API.
 
 ## Resources
-* Materialize CSS 
-* Gutendex API
-* Trivia API
+* [Materialize CSS](https://materializecss.com/)
+* [Gutendex API](https://github.com/garethbjohnson/gutendex)
+* [Open Trivia DB](https://opentdb.com/)
 * Joke API
-* jQuery
+* [jQuery](https://jquery.com/)

@@ -1,5 +1,6 @@
 
 
+// When the read button is clicked
 $("#read-button").on("click", function() {
     
     // clear out div contents

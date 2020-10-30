@@ -12,6 +12,13 @@ The concept of the project is to provide options for bored individuals, similar 
 ## Features
 The Living Room utilizes three unique server-side APIs. The first uses Gutendex which is a JSON web API for Project Gutenberg, a library of over 60,000 free eBooks. The second is Open Trivia DB, a trivia API. Last is (), a joke API.
 
+## Credits
+This project was created by the following developers.
+* [Calista Mayer](https://github.com/calistamayer)
+* [Danielle](https://github.com/webprinc3ss)
+* [Anthone Kieu](https://github.com/anthonykieu)
+* [Jason Barnes](https://github.com/yooperjb)
+
 ## Resources
 * [Materialize CSS](https://materializecss.com/)
 * [Gutendex API](https://github.com/garethbjohnson/gutendex)

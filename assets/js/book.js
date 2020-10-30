@@ -1,6 +1,6 @@
 
 
-$("#read-cell").on("click", "a", function() {
+$("#read-button").on("click", function() {
     
     // clear out div contents
     $("#content-cell").empty();

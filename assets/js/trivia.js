@@ -72,7 +72,6 @@ var showQuiz = function (trivia) {
     console.log(correctHTML)
 
 
-
     // document.querySelector(".answer").innerHTML
     document.querySelectorAll(".answer").forEach(function (item) {
 

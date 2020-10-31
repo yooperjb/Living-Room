@@ -1,4 +1,4 @@
-//var highScores = JSON.parse(localStorage.getItem("highScores")) || []
+var highScores = JSON.parse(localStorage.getItem("highScores")) || []
 
 
 questionNumber = 1;
@@ -94,33 +94,81 @@ $("#buttons").on("click", "button", function () {
     // clear out the buttons and create a next question button
     console.log("PlayerScore: ", playerScore);
     $("#next").show()
-
-})
-
-$("#next").on("click", function () {
-
-    if (questionNumber < 4) {
-        $("#answerStatus").text("");
-        $("#next").hide();
-
-        playTrivia();
-    } else {
-        // $("#buttons").empty();
+    if (questionNumber >= 4) {
+        $("#initialsForm").show();
         $("#score").html("Score: " + playerScore);
         $("#answerStatus").text("Game Over!");
         $("#next").text("Play again?")
-        $("#next").show();
         $("#quit").show();
-        $("#saveScore").show();
 
-        if ($("#next").value() === true) {
+    }
+})
+
+$("#next").on("click", function () {
+    $("#answerStatus").text("");
+    $("#next").hide();
+    if (questionNumber >= 4) {
 
 
-            console.log()
+        // $("#buttons").empty();
+        playerScore = 0;
+        $("#score").html("Score: " + playerScore);
+        questionNumber = 0;
+        $("#next").text("Next Question")
+        $("#quit").hide();
+        $("#saveScore").hide();
 
+    }
+
+    playTrivia();
+});
+
+
+// This will be the function to call when game is quit - save score to localStorage, etc. 
+$("#quit").on("click", function () {
+    $("#quizContainer").hide();
+})
+
+$("#initialsForm").on("submit", function (event) {
+    event.preventDefault();
+    var initials = $(this).children("input").val()
+
+    if (!initials) {
+        return;
+
+    }
+    console.log(initials)
+    highScores.push({ initials, score: playerScore })
+    highScores.sort(function (a, b) {
+        if (a.score < b.score) {
+            return 1;
+        } else if (a.score > b.score) {
+            return -1;
+        } else if (a.initials > b.initials) {
+            return 1;
+        } else if (a.initials < b.initials) {
+            return -1;
         } else {
-            //Thank you.  Good bye  -- button to close or play again
+            return 0;
         }
+    })
+    highScores.splice(10)
+    localStorage.setItem("highScores", JSON.stringify(highScores))
+})
+
+
+
+
+playTrivia();
+
+
+        //Similar to joke close code:
+        // $("#closeJokeButton").click(function () {
+        //     $("#sectionContainer").hide();
+        // });
+
+        //If play again
+        // playTrivia();
 
 
         //if save score
@@ -135,32 +183,3 @@ $("#next").on("click", function () {
         //  //Show  Play again? or Leave game?  Buttons
 
         //If Leave Game
-        //Similar to joke close code:
-        // $("#closeJokeButton").click(function () {
-        //     $("#sectionContainer").hide();
-        // });
-
-        //If play again
-        // playTrivia();
-
-
-
-
-
-
-    }
-
-
-
-
-    // $("#answerStatus").text("");
-    // $("#next").hide();
-    // playTrivia();
-});
-
-
-// This will be the function to call when game is quit - save score to localStorage, etc. 
-//$("#quit").on("click", quitGame());
-
-// This will get replaced with listener for Trivia button on main page
-playTrivia();

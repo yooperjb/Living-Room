@@ -24,3 +24,12 @@ h1 {
 #content-cell {
     min-height: 0;
 }
+
+/* .custom-content {
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px;
+    border: solid #9a3918  2px;
+    border-radius: 2%;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+} */

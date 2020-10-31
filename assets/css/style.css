@@ -1,7 +1,3 @@
-h1, .row {
-    text-align: center;
-}
-
 body::after {
     content: "";
     background: url(../images/fireplace.jpg);
@@ -15,12 +11,41 @@ body::after {
     z-index: -1;   
   }
 
+body {
+    font-family: 'Courier New', Courier, monospace;
+}
 
-h1 {
-    text-shadow: 0 10px 50px rgb(0, 0, 0);
-    color: white;
+.welcome-banner {
+    color: #fbe9e7;
+    background-color: rgba(191, 54, 12, .8);
+    padding: 20px;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+a {
+    font-weight: bold;
 }
 
 div#content-cell {
     min-height: 0;
 }
+
+/* .custom-content {
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px;
+    border: solid #9a3918  2px;
+    border-radius: 2%;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+} */

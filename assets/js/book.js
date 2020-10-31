@@ -41,9 +41,9 @@ var getRandomBook = function(){
             }
             
             // create elements for displaying book info
-            var bookTitleEl = $("<h2>").text(bookTitle);
-            var bookAuthorEl = $("<h4>").text("Author: " +bookAuthor);
-            var bookSubjectEl = $("<h4>").text(bookSubject);
+            var bookTitleEl = $("<h4>").text(bookTitle);
+            var bookAuthorEl = $("<p>").text("Author: " +bookAuthor);
+            var bookSubjectEl = $("<p>").text(bookSubject);
             var bookURLLinkEl = $("<a>").attr({href: bookURL, target: "_blank"}).text("Read Book");
             var bookURLEl = $("<h4>").append(bookURLLinkEl);
             var bookImageEl = $("<img>").attr("src", bookImage);

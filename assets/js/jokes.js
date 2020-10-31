@@ -19,8 +19,7 @@ $("#joke-button").click(function () {
     $("#content-cell").empty();
     $("#sectionContainer").show();
     $('#sectionContainer').css('display', 'flex');
+    grabJoke();
 });
 
-// document.addEventListener("DOMContentLoaded", grabJoke);
-$(document).on("DOMContentLoaded", grabJoke);
 $("#jokeButton").click(grabJoke);

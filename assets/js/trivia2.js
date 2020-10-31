@@ -2,7 +2,6 @@
 
 const api = {
     base: "https://opentdb.com/api.php",
-
 };
 
 var playTrivia = function () {
@@ -109,6 +108,5 @@ var answserQuiz = function (trivia) {
 //     }
 //     ,
 // ]
-
 
 playTrivia();

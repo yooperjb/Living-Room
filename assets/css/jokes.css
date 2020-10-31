@@ -3,8 +3,8 @@ section{
     min-height: 90vh;
     width: 100%;
     padding: 50px 0;
-    display: flex;
-    visibility: hidden;
+    display: none;
+    /* visibility: hidden; */
     align-items: center;
     justify-content: center; 
 }

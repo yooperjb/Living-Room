@@ -1,11 +1,4 @@
-var jokeButton = document.querySelector("#jokeButton");
-var displayJoke = document.querySelector("#fetchedJoke");
-var openJoke = document.querySelector("#joke-button");
-var closeJokeBtn = document.querySelector("#closeJokeButton");
-
 // Fetches jokes from api //
-jokeButton.addEventListener("click", grabJoke);
-
 function grabJoke() {
     fetch("https://icanhazdadjoke.com/", {
         headers: {
@@ -13,24 +6,21 @@ function grabJoke() {
         }
     })
         .then(data => data.json())
-        .then(obj => displayJoke.innerHTML = obj.joke)
+        .then(obj => $("#fetchedJoke").text(obj.joke))
 };
-// Close the joke section //
-closeJokeBtn.addEventListener("click", closeJoke);
 
-function closeJoke() {
-    // document.getElementById("sectionContainer").style.visibility = "hidden";
+// Exit the joke section //
+$("#closeJokeButton").click(function () {
     $("#sectionContainer").hide();
-};
+});
 
 // Joke activity to make it visible //
-openJoke.addEventListener("click", visibleJoke);
-
-function visibleJoke() {
+$("#joke-button").click(function () {
     $("#content-cell").empty();
-
-    document.getElementById("sectionContainer").style.visibility = "visible";
     $("#sectionContainer").show();
-};
+    $('#sectionContainer').css('display', 'flex');
+});
 
-document.addEventListener("DOMContentLoaded", grabJoke);
+// document.addEventListener("DOMContentLoaded", grabJoke);
+$(document).on("DOMContentLoaded", grabJoke);
+$("#jokeButton").click(grabJoke);

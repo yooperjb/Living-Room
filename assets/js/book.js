@@ -65,6 +65,7 @@ var getRandomBook = function(){
             
             var bookDivEl = $("<div>").attr("id", "bookBtnDiv").append(readButtonEl,saveButtonEl);
 
+            // book image
             var bookImageEl = $("<img>").attr("src", bookImage);
             
             // append all elements to content-cell div
@@ -88,19 +89,23 @@ var saveBook = function(title,url) {
 
 // load books from localStorage
 var loadBooks = function() {
+    
     books = JSON.parse(localStorage.getItem("books"));
     $("#bookshelf").empty();
     var bookShelfListEl = $("<ul>");
     
+    // if localStorage is empty create empty object
     if (!books) {
         books = {};
     }
     
+    // create list item for each saved item
     $.each(books, function(key,value){
         console.log(key,value);
         var bookItemEl = $("<li>").text(key);
         bookShelfListEl.append(bookItemEl);
     })
 
-     $("#bookshelf").append(bookShelfListEl);
+    
+    $("#bookshelf").append(bookShelfListEl);
 };

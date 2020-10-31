@@ -10,21 +10,22 @@
 <body>
     <h1>Trivia Game</h1>
     <div id="quizContainer">
-        <p id="score"></p>
         <p id="category"></p>
         <p id="difficulty"></p>
         <p id="question"></p>
-        <button id="answer1" class="correct answer" style="display:none"></button>
-        <button id="answer2" class="incorrect answer" style="display:none"></button>
-        <button id="answer3" class="incorrect answer" style="display:none"></button>
-        <button id="answer4" class="incorrect answer" style="display:none"></button>
+        <div id="buttons">
+        </div>
         <p id="answerStatus"></p>
-        <p id="gameStatus"></p>
-        <button id="nextQuestion" style="display:none">Next Question</button>
+        <div>
+            <button id="next">Next Question</button>
+            <button id="quit">Quit</button>
+        </div>
     </div>
 
-
-    <script src="assets/js/trivia.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="./assets/js/trivia.js"></script>
 </body>
 
 </html>

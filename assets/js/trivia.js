@@ -1,115 +1,89 @@
 //var highScores = JSON.parse(localStorage.getItem("highScores")) || []
-var displayStatus = document.getElementById("answerStatus")
-var nextButton = document.getElementById("nextQuestion")
-var currentQuestion = 0
-var score = 0
 
+playerScore = 0;
 const api = {
     base: "https://opentdb.com/api.php",
 };
 
+// fetch trivia api and pass results to showQuiz
 var playTrivia = function () {
-    fetch(`${api.base}?amount=1&type=multiple`)
-        .then(function (trivia) {
-            // request was successful
-            if (trivia.ok) {
-                return trivia.json()
-                    .then
-                    (showQuiz);
-            } else {
-                document.querySelector(".error").textContent = "Unable to connect to Open Trivia Database"
-                document.querySelector(".status").style = "display: block";
-                setTimeout(function () {
-                    document.querySelector(".status").style = "display: none";
-                }, 2000);
-            }
+    fetch(`${api.base}?amount=3&type=multiple`)
+        .then(response => response.json()) 
+        .then(trivia => {
+            console.log("Trivia:" , trivia);
+            $("quizContainer").empty()
+            showQuiz(trivia);
         })
-        .catch(function (error) {
-            // document.querySelector(".error").textContent = "Unable to connect to Open Trivia Database";
-            // document.querySelector(".status").style = "display: block";
-            // setTimeout(function () {
-            //     document.querySelector(".status").style = "display: none";
-            // }, 2000);
+        
+        // if an error is caught - Display something to page here
+        .catch((error) => {
+            console.log("We have an Error!");
+            console.log(error);
         });
-}
-
-var showQuiz = function (trivia) {
-    console.log(trivia.results)
-    document.getElementById("category").innerHTML = "Category:" + trivia.results[0].category
-    document.getElementById("difficulty").innerHTML = "Difficulty:" + trivia.results[0].difficulty
-    document.getElementById("question").innerHTML = "Question:" + trivia.results[0].question
-
-
-    document.getElementById("answer1").style = "display:inline"
-    document.getElementById("answer1").innerHTML = trivia.results[0].correct_answer
-
-    document.getElementById("answer2").style = "display:inline"
-    document.getElementById("answer2").innerHTML = trivia.results[0].incorrect_answers[0]
-
-    document.getElementById("answer3").style = "display:inline"
-    document.getElementById("answer3").innerHTML = trivia.results[0].incorrect_answers[1]
-
-    document.getElementById("answer4").style = "display:inline"
-    document.getElementById("answer4").innerHTML = trivia.results[0].incorrect_answers[2]
-
-
-    var correctButton = document.getElementById("answer1")
-
-    correctButton.addEventListener("click", function (event) {
-        event.preventDefault();
-        document.getElementById("answerStatus").innerHTML = "Way to Go! Yes, the correct answer is " + trivia.results[0].correct_answer
-        console.log("correct");
-        var correct = true
-        quizStatus(correct)
-    })
-
-    document.querySelectorAll(".incorrect").forEach((item) => {
-        item.addEventListener("click", (event) => {
-            console.log("incorrect");
-            event.preventDefault();
-            document.getElementById("answerStatus").innerHTML = "Nope! That's not correct. The correct answer is " + trivia.results[0].correct_answer
-            quizStatus()
-        });
-    });
-}
-
-var quizStatus = function (correct) {
-
-    if (correct) {
-        score = score++
-        document.getElementById("score").innerHTML = "Your score is " + score
-
-
-    } else {
-        document.getElementById("score").innerHTML = "Your score is " + score
-    }
-
-    currentQuestion++
-    if (currentQuestion <= 10) {
-        console.log(currentQuestion)
-        document.getElementById("answer1").style = "display:none"
-        document.getElementById("answer2").style = "display:none"
-        document.getElementById("answer3").style = "display:none"
-        document.getElementById("answer4").style = "display:none"
-        document.getElementById("nextQuestion").style = "display:block"
-
-    } else {
-        console.log("You've finished!")
-        document.getElementById("nextQuestion").style = "display:none"
-        document.getElementById("gameStatus").innerHTML = "All done!"
-    }
 };
 
-nextButton.addEventListener("click", function (event) {
-    event.preventDefault()
-    document.getElementById("nextQuestion").style = "display:none"
-    clearContent()
-    playTrivia()
+// After successful fetch showQuiz
+var showQuiz = function(trivia) {
+    
+    //console.log("Results:" ,trivia.results)
+    
+    // get first trivia results object - this could be randomized 1-3
+    var triviaQuestion = trivia.results[0]
+    console.log("TriviaQuestion: ",triviaQuestion)
+    
+    // set html data to trivia info
+    $("#category").text("Category: "+ triviaQuestion.category);
+    $("#difficulty").text("Difficulty: " + triviaQuestion.difficulty);
+    $("#question").text("Question: "+ triviaQuestion.question);
+
+    var randomNum = Math.floor(Math.random()*4+1);
+    var incorrectIndex = 0;
+    
+    for (let i = 1; i < 5; i++) {
+        
+        // if random number = index assign button to correct answer
+        if (i === randomNum) {
+            var answerBtn = $("<button>").text(triviaQuestion.correct_answer).attr("class", "correct");
+        }
+
+        // assign button to incorrect answer
+        else {
+            var answerBtn = $("<button>").text(triviaQuestion.incorrect_answers[incorrectIndex]).attr("class", "incorrect");
+            incorrectIndex ++;
+        }
+        
+        // append button to buttons div
+        $("#buttons").append(answerBtn);
+ 
+    }
+}
+
+// When answer button is clicked check for answer
+$("#buttons").on("click", "button", function() {
+    var buttonClass = $(this).attr("class");
+    
+    // if correct answer is clicked
+    if (buttonClass === "correct") {
+        $("#answerStatus").text("That is the correct answer!");
+        playerScore++;
+        
+    } // if incorrect answer is clicked
+    else {
+        $("#answerStatus").text("Nope, that is not the correct answer.");
+        // Use this section to display the correct answer. You may need to store correct answer globally to get it. 
+    }
+
+    // clear out the buttons and create a next question button
+    console.log("PlayerScore: ",playerScore);
+    $("#buttons").empty();
 })
 
+$("#next").on("click", function() {
+    playTrivia();
+});
 
-var clearContent = function () {
-    displayStatus.innerHTML = ""
-};
+// This will be the function to call when game is quit - save score to localStorage, etc. 
+//$("#quit").on("click", quitGame());
 
+// This will get replaced with listener for Trivia button on main page
 playTrivia();

@@ -41,7 +41,6 @@ section{
     float: left;
     border-radius: 2%;
     border: none;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 .closeJokeButton{
     margin-top: 10px;
@@ -49,18 +48,9 @@ section{
     padding: 15px;
     font-size: 20px;
     background-color:#9a3918;
-    
     color:white;
     float: right;
     border-radius: 2%;
     border: none;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.closeJokeButton:hover {
-    background-color:#b8340a;
-}
-
-.jokeButton:hover {
-    background-color:#b8340a;
-}

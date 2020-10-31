@@ -79,6 +79,7 @@ $("#buttons").on("click", "button", function() {
 })
 
 $("#next").on("click", function() {
+    $("#answerStatus").text("");
     playTrivia();
 });
 

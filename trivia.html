@@ -19,8 +19,27 @@
         <p id="answerStatus"></p>
         <div>
             <button id="next" hidden>Next Question</button>
-            <button id="quit" hidden>Quit</button>
+            <button id="quit" hidden>Quit?</button>
+            <button id="saveScore" hidden>Save Score?</button>
         </div>
+
+        <form id="initialsForm" hidden>
+            <p>Enter initials</p>
+            <input type="text" id="inputInitials" name="inputInitials">
+            <button class="initialBtn" type="submit">Submit</button></p>
+            <br>
+            <p id="validate"></p>
+        </form>
+    </div>
+    <!-- High Scores Container on main HTML-->
+    <div id="high-scores" hidden>
+        <h3>High Scores</h3>
+        <div id="scorelist">
+            <span id="initials"></span> | <span id="scoreDisplay"></span><br>
+
+        </div>
+        <button id="goBack" class="initialBtn">Go Back</button>
+        <button id="clearScores" class="initialBtn">Clear High Scores</button>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

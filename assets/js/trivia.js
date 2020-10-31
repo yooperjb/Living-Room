@@ -44,7 +44,7 @@ var showQuiz = function (trivia) {
     console.log("TriviaQuestion: ", triviaQuestion)
 
     // set html data to trivia info
-
+    $("#score").html("Score: " + playerScore);
     $("#category").html("Category: " + triviaQuestion.category);
     $("#difficulty").html("Difficulty: " + triviaQuestion.difficulty);
     $("#question").html("Question " + questionNumber + ":&nbsp;" + triviaQuestion.question);
@@ -99,17 +99,29 @@ $("#buttons").on("click", "button", function () {
 
 $("#next").on("click", function () {
 
-    if (questionNumber < 11) {
+    if (questionNumber < 4) {
         $("#answerStatus").text("");
         $("#next").hide();
 
         playTrivia();
     } else {
         // $("#buttons").empty();
-        $("#answerStatus").text("");
-        $("#next").show().text("Game Over!")
+        $("#score").html("Score: " + playerScore);
+        $("#answerStatus").text("Game Over!");
+        $("#next").text("Play again?")
+        $("#next").show();
+        $("#quit").show();
+        $("#saveScore").show();
 
-        // Show three buttons - save score | leave game | play again
+        if ($("#next").value() === true) {
+
+
+            console.log()
+
+        } else {
+            //Thank you.  Good bye  -- button to close or play again
+        }
+
 
         //if save score
         //  //hide Leave game? | play again?
@@ -132,12 +144,7 @@ $("#next").on("click", function () {
         // playTrivia();
 
 
-        if ($("#next").value() === true) {
-            console.log()
 
-        } else {
-            //Thank you.  Good bye  -- button to close or play again
-        }
 
 
 

@@ -26,8 +26,8 @@
         </div>
 
         <form id="initialsForm" hidden>
-            <p>Enter initials</p>
-            <input type="text" id="inputInitials">
+            <p>Enter two initials please</p>
+            <input id="inputInitials" name="inputInitials" minlength="2" maxlength="2" type="text" required>
             <button type="submit" id="submitHS">Submit</button></p>
             <br>
             <p id="validate"></p>
@@ -39,7 +39,7 @@
         <div id="scoreDisplay"></div>
         <button id="clearScores" hidden>Clear High Scores</button>
     </div>
-
+    <script src=https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

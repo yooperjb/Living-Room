@@ -109,11 +109,36 @@ $("#quit").on("click", function () {
 
 $("#initialsForm").on("submit", function (event) {
     event.preventDefault();
+
     var initials = $(this).children("input").val()
 
-    if (!initials) {
-        return;
-    }
+    $.validator.addMethod("loginRegex", function (value, element) {
+        return this.optional(element) || /^[a-zA-Z]+$/i.test(value);
+    }, "Username must contain only letters.");
+
+    $(document).ready(function () {
+        $("#initialsForm").validate({
+            rules: {
+                inputInitials: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 2,
+                    cloginRegex: true,
+                },
+            },
+        });
+    });
+
+    // if (!initials || initials.length > 3) {
+    //     $("inputInitials").html("Please enter two letters.")
+    //     return;
+    // }
+
+    // if ($(initials).val().match(letters)) {
+    // } else {
+    //     document.getElementById("validate").innerHTML = "Please enter only two letters."
+    //     return;
+    // }
 
     console.log(initials)
     highScores.push({ initials, score: playerScore })

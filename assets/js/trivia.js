@@ -11,15 +11,13 @@ var playTrivia = function () {
     fetch(`${api.base}?amount=3&type=multiple`)
         .then(response => response.json())
         .then(trivia => {
-            console.log("Trivia:", trivia);
             $("quizContainer").empty()
             showQuiz(trivia);
         })
 
         // if an error is caught - Display something to page here
         .catch((error) => {
-            console.log("We have an Error!");
-            console.log(error);
+            $("#error").html("There is an error with the API.")
         });
 };
 
@@ -27,12 +25,9 @@ var playTrivia = function () {
 var showQuiz = function (trivia) {
 
     JSON.stringify(trivia.results)
-    console.log(trivia.results)
 
     // get first trivia results object - this could be randomized 1-3
     var triviaQuestion = trivia.results[0]
-
-    console.log("TriviaQuestion: ", triviaQuestion)
 
     // set html data to trivia info
     $("#score").html("Score: " + playerScore);
@@ -77,8 +72,6 @@ $("#buttons").on("click", "button", function () {
     }
     //Advance Question and Score
     questionNumber++;
-    console.log(questionNumber)
-    console.log("PlayerScore: ", playerScore);
     $("#next").show()
     if (questionNumber >= 4) {
         $("#initialsForm").show();
@@ -111,49 +104,14 @@ $("#initialsForm").on("submit", function (event) {
     event.preventDefault();
 
     var initials = $(this).children("input").val()
-
-    // $.validator.addMethod("loginRegex", function (value, element) {
-    //     return this.optional(element) || /^[a-zA-Z]+$/i.test(value);
-    // }, "Username must contain only letters.");
-
-    // $(document).ready(function () {
-    //     $("#initialsForm").validate({
-    //         rules: {
-    //             inputInitials: {
-    //                 required: true,
-    //                 minlength: 2,
-    //                 maxlength: 2,
-    //                 loginRegex: true,
-    //             },
-    //         },
-    //     });
-    // });
-
-
     var patt = new RegExp("^[a-zA-Z]+$");
     var res = patt.test(initials);
-
 
     if (!initials || initials.length > 3 || !res) {
         $("#inputInitials").val("Please enter two letters.")
         return;
     }
 
-    // if (/^[a-zA-Z]+$/) {
-
-    // }
-
-
-
-
-
-    // if ($(initials).val().match(letters)) {
-    // } else {
-    //     document.getElementById("validate").innerHTML = "Please enter only two letters."
-    //     return;
-    // }
-
-    console.log(initials)
     highScores.push({ initials, score: playerScore })
     highScores.sort(function (a, b) {
         if (a.score < b.score) {
@@ -178,7 +136,6 @@ $("#initialsForm").on("submit", function (event) {
 
 // load High Scores from localStorage
 var loadScores = function () {
-
     $("#scoreDisplay").empty();
     var scoreList = $("<ul>");
 
@@ -192,11 +149,6 @@ var loadScores = function () {
     $("#clearScores").show();
 
     $("#clearScores").on("click", function () {
-
-        // Object.keys(localStorage)
-        //     .forEach(function (key) {
-        //         localStorage.removeItem();
-        //     });
         $("<li>").remove()
         $("#scoreDisplay").empty();
         highScores = []

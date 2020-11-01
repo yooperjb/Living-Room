@@ -8,7 +8,7 @@ body::after {
     bottom: 0;
     right: 0;
     position: absolute;
-    z-index: -1;   
+    z-index: -1;
   }
 
 body {
@@ -31,10 +31,27 @@ body {
     margin-right: auto;
     margin-left: auto;
     text-align: center;
+
+}
+
+#content-row .col {
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+#content-row {
+    display: flex;
 }
 
 a {
     font-weight: bold;
+}
+
+.storage-div li {
+    border-bottom: solid 1px #ffccbc;
+
 }
 
 div#content-cell {

@@ -75,6 +75,7 @@ $("#buttons").on("click", "button", function () {
         $("#answerStatus").html("Nope, that is not the correct answer. The correct answer is: " + $(this).siblings(".correct").text());
         $("#buttons").empty();
     }
+    //Advance Question and Score
     questionNumber++;
     console.log(questionNumber)
     console.log("PlayerScore: ", playerScore);
@@ -113,6 +114,7 @@ $("#initialsForm").on("submit", function (event) {
     if (!initials) {
         return;
     }
+
     console.log(initials)
     highScores.push({ initials, score: playerScore })
     highScores.sort(function (a, b) {
@@ -132,7 +134,22 @@ $("#initialsForm").on("submit", function (event) {
     localStorage.setItem("highScores", JSON.stringify(highScores))
     $("#initialsForm").hide()
     $("#high-scores").show()
-
+    loadScores();
 })
+
+// load High Scores from localStorage
+var loadScores = function () {
+
+    scores = JSON.parse(localStorage.getItem("highScores"));
+    $("#scoreDisplay").empty();
+    var scoreList = $("<ul>");
+
+    highScores.forEach((element) => {
+        var highscore = $("<li>").html(element.initials + "&nbsp;|&nbsp;" + element.score);
+        scoreList.append(highscore);
+    })
+
+    $("#scoreDisplay").append(scoreList);
+};
 
 playTrivia();

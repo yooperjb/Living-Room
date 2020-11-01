@@ -140,7 +140,6 @@ $("#initialsForm").on("submit", function (event) {
 // load High Scores from localStorage
 var loadScores = function () {
 
-    scores = JSON.parse(localStorage.getItem("highScores"));
     $("#scoreDisplay").empty();
     var scoreList = $("<ul>");
 
@@ -150,6 +149,17 @@ var loadScores = function () {
     })
 
     $("#scoreDisplay").append(scoreList);
+    $("#high-scores").show();
+    $("#clearScores").show();
+    $("#inputInitials").empty();
+    // $("#scoreDisplay").show();
+
+    $("#clearScores").on("click", function () {
+        localStorage.clear();
+        $("#scoreDisplay").empty();
+        $("#high-scores").hide();
+        // $("#clearScores").hide();
+    })
 };
 
 playTrivia();

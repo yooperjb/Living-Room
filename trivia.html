@@ -10,7 +10,7 @@
 <body>
 
     <div id="quizContainer">
-        <h1>Trivia Game</h1>
+        <h4>Trivia Game</h4>
         <p id="score"></p>
         <p id="category"></p>
         <p id="difficulty"></p>
@@ -27,8 +27,8 @@
 
         <form id="initialsForm" hidden>
             <p>Enter initials</p>
-            <input type="text" id="inputInitials" name="inputInitials">
-            <button class="initialBtn" type="submit">Submit</button></p>
+            <input type="text" id="inputInitials">
+            <button type="submit">Submit</button></p>
             <br>
             <p id="validate"></p>
         </form>
@@ -36,9 +36,8 @@
     <!-- High Scores Container on main HTML-->
     <div id="high-scores" hidden>
         <h3>High Scores</h3>
-        <div id="scorelist">
-        </div>
-        <button id="clearScores" class="initialBtn">Clear High Scores</button>
+        <div id="scoreDisplay"></div>
+        <button id="clearScores" hidden>Clear High Scores</button>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

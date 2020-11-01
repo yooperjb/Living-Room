@@ -134,6 +134,7 @@ $("#initialsForm").on("submit", function (event) {
     localStorage.setItem("highScores", JSON.stringify(highScores))
     $("#initialsForm").hide()
     $("#high-scores").show()
+    $(highScores).removeData()
     loadScores();
 })
 
@@ -144,22 +145,25 @@ var loadScores = function () {
     var scoreList = $("<ul>");
 
     highScores.forEach((element) => {
-        var highscore = $("<li>").html(element.initials + "&nbsp;|&nbsp;" + element.score);
+        var highscore = $("<li>").html(element.initials + " | " + element.score);
         scoreList.append(highscore);
     })
 
     $("#scoreDisplay").append(scoreList);
     $("#high-scores").show();
     $("#clearScores").show();
-    $("#inputInitials").empty();
-    // $("#scoreDisplay").show();
 
     $("#clearScores").on("click", function () {
-        localStorage.clear();
+
+        Object.keys(localStorage)
+            .forEach(function (key) {
+                localStorage.removeItem(key);
+            });
+        $("<li>").remove()
         $("#scoreDisplay").empty();
-        $("#high-scores").hide();
-        // $("#clearScores").hide();
+
     })
 };
 
+loadScores();
 playTrivia();

@@ -1,10 +1,24 @@
 var highScores = JSON.parse(localStorage.getItem("highScores")) || []
 
+$("#trivia-button").on("click", function () {
+
+    $("#content-cell").empty();
+    $(".trivia-content").show();
+    $("#sectionContainer").hide();
+    $("#quizContainer").show();
+
+
+    playTrivia();
+});
+
 questionNumber = 1;
 playerScore = 0;
 const api = {
     base: "https://opentdb.com/api.php",
 };
+
+//Activate Triva Quiz from button on top of Main page!
+
 
 // fetch trivia api and pass results to showQuiz
 var playTrivia = function () {
@@ -156,5 +170,6 @@ var loadScores = function () {
     })
 };
 
+
+
 loadScores();
-playTrivia();

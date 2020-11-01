@@ -112,27 +112,40 @@ $("#initialsForm").on("submit", function (event) {
 
     var initials = $(this).children("input").val()
 
-    $.validator.addMethod("loginRegex", function (value, element) {
-        return this.optional(element) || /^[a-zA-Z]+$/i.test(value);
-    }, "Username must contain only letters.");
+    // $.validator.addMethod("loginRegex", function (value, element) {
+    //     return this.optional(element) || /^[a-zA-Z]+$/i.test(value);
+    // }, "Username must contain only letters.");
 
-    $(document).ready(function () {
-        $("#initialsForm").validate({
-            rules: {
-                inputInitials: {
-                    required: true,
-                    minlength: 2,
-                    maxlength: 2,
-                    cloginRegex: true,
-                },
-            },
-        });
-    });
+    // $(document).ready(function () {
+    //     $("#initialsForm").validate({
+    //         rules: {
+    //             inputInitials: {
+    //                 required: true,
+    //                 minlength: 2,
+    //                 maxlength: 2,
+    //                 loginRegex: true,
+    //             },
+    //         },
+    //     });
+    // });
 
-    // if (!initials || initials.length > 3) {
-    //     $("inputInitials").html("Please enter two letters.")
-    //     return;
+
+    var patt = new RegExp("^[a-zA-Z]+$");
+    var res = patt.test(initials);
+
+
+    if (!initials || initials.length > 3 || !res) {
+        $("#inputInitials").val("Please enter two letters.")
+        return;
+    }
+
+    // if (/^[a-zA-Z]+$/) {
+
     // }
+
+
+
+
 
     // if ($(initials).val().match(letters)) {
     // } else {
@@ -159,7 +172,7 @@ $("#initialsForm").on("submit", function (event) {
     localStorage.setItem("highScores", JSON.stringify(highScores))
     $("#initialsForm").hide()
     $("#high-scores").show()
-    $(highScores).removeData()
+    // $(highScores).removeData()
     loadScores();
 })
 
@@ -180,13 +193,14 @@ var loadScores = function () {
 
     $("#clearScores").on("click", function () {
 
-        Object.keys(localStorage)
-            .forEach(function (key) {
-                localStorage.removeItem(key);
-            });
+        // Object.keys(localStorage)
+        //     .forEach(function (key) {
+        //         localStorage.removeItem();
+        //     });
         $("<li>").remove()
         $("#scoreDisplay").empty();
-
+        highScores = []
+        localStorage.setItem("highScores", JSON.stringify(highScores))
     })
 };
 

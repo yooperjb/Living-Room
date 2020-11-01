@@ -7,6 +7,7 @@ function grabJoke() {
     })
         .then(data => data.json())
         .then(obj => $("#fetchedJoke").text(obj.joke))
+        
 };
 
 // Exit the joke section //
@@ -22,4 +23,5 @@ $("#joke-button").click(function () {
     grabJoke();
 });
 
+// Go to the next joke //
 $("#jokeButton").click(grabJoke);

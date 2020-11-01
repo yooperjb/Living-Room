@@ -4,6 +4,7 @@ section{
     width: 100%;
     padding: 50px 0;
     display: none;
+    /* display: flex; */
     /* visibility: hidden; */
     align-items: center;
     justify-content: center; 

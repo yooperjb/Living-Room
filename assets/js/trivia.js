@@ -1,188 +1,208 @@
-//var highScores = JSON.parse(localStorage.getItem("highScores")) || []
-var displayStatus = document.getElementById("answerStatus")
-var nextButton = document.getElementById("nextQuestion")
-var quizQuestions = document.querySelectorAll(".astyle")
-var currentQuestion = 0
-var score = 0
-var choice = document.querySelector(".answer")
-document.getElementById("questionNumber").html = currentQuestion
+var highScores = JSON.parse(localStorage.getItem("highScores")) || []
 
-
+questionNumber = 1;
+playerScore = 0;
 const api = {
     base: "https://opentdb.com/api.php",
 };
 
+// fetch trivia api and pass results to showQuiz
 var playTrivia = function () {
-    fetch(`${api.base}?amount=1&type=multiple`)
-        .then(function (trivia) {
-            // request was successful
-            if (trivia.ok) {
-                return trivia.json()
-                    .then
-                    (showQuiz);
-            } else {
-                document.querySelector(".error").textContent = "Unable to connect to Open Trivia Database"
-                document.querySelector(".status").style = "display: block";
-                setTimeout(function () {
-                    document.querySelector(".status").style = "display: none";
-                }, 2000);
-            }
+    fetch(`${api.base}?amount=3&type=multiple`)
+        .then(response => response.json())
+        .then(trivia => {
+            console.log("Trivia:", trivia);
+            $("quizContainer").empty()
+            showQuiz(trivia);
         })
-        .catch(function (error) {
-            // document.querySelector(".error").textContent = "Unable to connect to Open Trivia Database";
-            // document.querySelector(".status").style = "display: block";
-            // setTimeout(function () {
-            //     document.querySelector(".status").style = "display: none";
-            // }, 2000);
+
+        // if an error is caught - Display something to page here
+        .catch((error) => {
+            console.log("We have an Error!");
+            console.log(error);
         });
-}
-
-var showQuiz = function (trivia) {
-    console.log(trivia.results)
-    document.getElementById("category").innerHTML = "Category:" + trivia.results[0].category
-    document.getElementById("difficulty").innerHTML = "Difficulty:" + trivia.results[0].difficulty
-    document.getElementById("question").innerHTML = "Question:" + trivia.results[0].question
-    console.log("question posted")
-
-
-    var correctAnswer = trivia.results[0].correct_answer;
-    console.log(correctAnswer)
-
-    var pointer = 0;
-    var random = Math.floor(Math.random() * 4 + 1) //correct_answer
-    // console.log(random.value)
-
-    for (var index = 1; index < 5; index++) {
-        if (index === random) {
-
-            document.getElementById("answer" + index).style = "display:inline";
-            document.getElementById("answer" + index).innerHTML = trivia.results[0].correct_answer;
-            var correctHTML = document.getElementById("answer" + index).innerHTML
-
-
-        } else {
-            document.getElementById("answer" + index).style = "display:inline";
-            document.getElementById("answer" + index).innerHTML = trivia.results[0].incorrect_answers[pointer];
-            pointer++;
-        }
-    }
-    // debugger;
-    // document.getElementById("myDIV").removeEventListener("mousemove", myFunction);
-
-    console.log(correctHTML)
-
-
-
-    // document.querySelector(".answer").innerHTML
-    document.querySelectorAll(".answer").forEach(function (item) {
-
-        item.addEventListener("click", function handler() {
-            // this.removeEventListener('click', handler);
-
-            if (correctHTML === document.querySelectorAll(".answer").innerHTML) {
-                astyle.style = "display:none"
-                document.getElementById("answerStatus").innerHTML = "Way to Go! Yes, the correct answer is " + correctHTML
-                console.log("correct");
-                var correct = true
-                gameStatus(correct)
-
-            }
-            else {
-                document.getElementById("answerStatus").innerHTML = "Nope! That's not correct. The correct answer is " + correctHTML;
-
-                console.log("incorrect");
-                document.getElementById("score").innerHTML = "Your score is " + score
-
-
-                gameStatus()
-
-            }
-
-        })
-    });
-}
-
-
-var gameStatus = function (correct) {
-    if (correct) {
-        score += 1
-        console.log(score)
-        document.getElementById("score").innerHTML = "Your score is " + score
-    } else {
-        score = score
-        console.log(score)
-        document.getElementById("score").innerHTML = "Your score is " + score
-    }
-
-    currentQuestion += 1
-    console.log(currentQuestion)
-    if (currentQuestion <= 10) {
-        console.log(currentQuestion)
-        quizQuestions.style = "display:none"
-        document.getElementById("nextQuestion").style = "display:block"
-
-
-    } else {
-        console.log(currentQuestion)
-        console.log("You've finished!")
-        document.getElementById("nextQuestion").style = "display:none"
-        quizQuestions.style = "display:none"
-        document.getElementById("gameStatus").innerHTML = "All done!"
-    }
 };
 
-nextButton.addEventListener("click", function (event) {
-    event.preventDefault()
-    document.getElementById("nextQuestion").style = "display:none"
+// After successful fetch showQuiz
+var showQuiz = function (trivia) {
 
-    clearContent()
-    playTrivia()
+    JSON.stringify(trivia.results)
+    console.log(trivia.results)
+
+    // get first trivia results object - this could be randomized 1-3
+    var triviaQuestion = trivia.results[0]
+
+    console.log("TriviaQuestion: ", triviaQuestion)
+
+    // set html data to trivia info
+    $("#score").html("Score: " + playerScore);
+    $("#category").html("Category: " + triviaQuestion.category);
+    $("#difficulty").html("Difficulty: " + triviaQuestion.difficulty);
+    $("#question").html("Question " + questionNumber + ":&nbsp;" + triviaQuestion.question);
+
+    var randomNum = Math.floor(Math.random() * 4 + 1);
+    var incorrectIndex = 0;
+
+    for (let i = 1; i < 5; i++) {
+        // if random number = index assign button to correct answer
+        if (i === randomNum) {
+            var answerBtn = $("<button>").html(triviaQuestion.correct_answer).attr("class", "correct");
+        }
+
+        // assign button to incorrect answer
+        else {
+            var answerBtn = $("<button>").html(triviaQuestion.incorrect_answers[incorrectIndex]).attr("class", "incorrect");
+            incorrectIndex++;
+        }
+        // append button to buttons div
+        $("#buttons").append(answerBtn);
+    }
+}
+
+// When answer button is clicked check for answer
+$("#buttons").on("click", "button", function () {
+    var buttonClass = $(this).attr("class");
+
+    // if correct answer is clicked
+    if (buttonClass === "correct") {
+        $("#answerStatus").text("That is the correct answer!");
+        playerScore++;
+        $("#score").html("Score: " + playerScore);
+        $("#buttons").empty();
+
+    } // if incorrect answer is clicked
+    else {
+        $("#answerStatus").html("Nope, that is not the correct answer. The correct answer is: " + $(this).siblings(".correct").text());
+        $("#buttons").empty();
+    }
+    //Advance Question and Score
+    questionNumber++;
+    console.log(questionNumber)
+    console.log("PlayerScore: ", playerScore);
+    $("#next").show()
+    if (questionNumber >= 4) {
+        $("#initialsForm").show();
+        $("#score").html("Score: " + playerScore);
+        $("#answerStatus").show();
+        $("#next").text("Play again?")
+        $("#quit").show();
+    }
 })
 
-var clearContent = function () {
-    displayStatus.innerHTML = ""
+$("#next").on("click", function () {
+    $("#answerStatus").text("");
+    $("#next").hide();
+    $("#initialsForm").hide()
+    if (questionNumber >= 4) {
+        playerScore = 0;
+        $("#score").html("Score: " + playerScore);
+        questionNumber = 0;
+        $("#next").text("Next Question")
+        $("#quit").hide();
+    }
+    playTrivia();
+});
 
+$("#quit").on("click", function () {
+    $("#quizContainer").hide();
+})
 
-};
+$("#initialsForm").on("submit", function (event) {
+    event.preventDefault();
 
+    var initials = $(this).children("input").val()
 
-playTrivia();
+    // $.validator.addMethod("loginRegex", function (value, element) {
+    //     return this.optional(element) || /^[a-zA-Z]+$/i.test(value);
+    // }, "Username must contain only letters.");
 
-
-
-
-
-    // var buttons = document.querySelectorAll('.answer')
-
-
-
-
-
-    //out of scope function 
-
-
-
-    // document.querySelectorAll(".answer").forEach((item) => {
-
-    //     //item.removeEventListener("click", (event));
-    //     item.addEventListener("click", (event) => {
-    //         event.preventDefault();
-    //         //check if item innerHTML is correct
-    //         debugger;
-    //         if (document.correctAnswer === document.querySelector(".answer").innerHTML) {
-    //             document.getElementById("answerStatus").innerHTML = "Way to Go! Yes, the correct answer is " +
-    //                 // trivia.results[0].correct_answer
-    //                 console.log("correct");
-    //             score += 1
-    //             console.log(score)
-    //             document.getElementById("score").innerHTML = "Your score is " + score
-    //             gameStatus()
-
-    //         } else {
-    //             document.getElementById("answerStatus").innerHTML = "Nope! That's not correct. The correct answer is " + trivia.results[0].correct_answer;
-    //             document.getElementById("score").innerHTML = "Your score is " + score
-    //             gameStatus();
-    //         }
-
+    // $(document).ready(function () {
+    //     $("#initialsForm").validate({
+    //         rules: {
+    //             inputInitials: {
+    //                 required: true,
+    //                 minlength: 2,
+    //                 maxlength: 2,
+    //                 loginRegex: true,
+    //             },
+    //         },
     //     });
     // });
+
+
+    var patt = new RegExp("^[a-zA-Z]+$");
+    var res = patt.test(initials);
+
+
+    if (!initials || initials.length > 3 || !res) {
+        $("#inputInitials").val("Please enter two letters.")
+        return;
+    }
+
+    // if (/^[a-zA-Z]+$/) {
+
+    // }
+
+
+
+
+
+    // if ($(initials).val().match(letters)) {
+    // } else {
+    //     document.getElementById("validate").innerHTML = "Please enter only two letters."
+    //     return;
+    // }
+
+    console.log(initials)
+    highScores.push({ initials, score: playerScore })
+    highScores.sort(function (a, b) {
+        if (a.score < b.score) {
+            return 1;
+        } else if (a.score > b.score) {
+            return -1;
+        } else if (a.initials > b.initials) {
+            return 1;
+        } else if (a.initials < b.initials) {
+            return -1;
+        } else {
+            return 0;
+        }
+    })
+    highScores.splice(10)
+    localStorage.setItem("highScores", JSON.stringify(highScores))
+    $("#initialsForm").hide()
+    $("#high-scores").show()
+    // $(highScores).removeData()
+    loadScores();
+})
+
+// load High Scores from localStorage
+var loadScores = function () {
+
+    $("#scoreDisplay").empty();
+    var scoreList = $("<ul>");
+
+    highScores.forEach((element) => {
+        var highscore = $("<li>").html(element.initials + " | " + element.score);
+        scoreList.append(highscore);
+    })
+
+    $("#scoreDisplay").append(scoreList);
+    $("#high-scores").show();
+    $("#clearScores").show();
+
+    $("#clearScores").on("click", function () {
+
+        // Object.keys(localStorage)
+        //     .forEach(function (key) {
+        //         localStorage.removeItem();
+        //     });
+        $("<li>").remove()
+        $("#scoreDisplay").empty();
+        highScores = []
+        localStorage.setItem("highScores", JSON.stringify(highScores))
+    })
+};
+
+loadScores();
+playTrivia();

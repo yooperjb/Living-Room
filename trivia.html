@@ -8,8 +8,9 @@
 </head>
 
 <body>
-    <h1>Trivia Game</h1>
+
     <div id="quizContainer">
+        <h1>Trivia Game</h1>
         <p id="score"></p>
         <p id="category"></p>
         <p id="difficulty"></p>
@@ -17,6 +18,7 @@
         <div id="buttons">
         </div>
         <p id="answerStatus"></p>
+        <p id="gameOver" hidden>Game Over!</p>
         <div>
             <button id="next" hidden>Next Question</button>
             <button id="quit" hidden>Quit?</button>
@@ -36,9 +38,7 @@
         <h3>High Scores</h3>
         <div id="scorelist">
             <span id="initials"></span> | <span id="scoreDisplay"></span><br>
-
         </div>
-        <button id="goBack" class="initialBtn">Go Back</button>
         <button id="clearScores" class="initialBtn">Clear High Scores</button>
     </div>
 

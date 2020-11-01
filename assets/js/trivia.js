@@ -1,6 +1,5 @@
 var highScores = JSON.parse(localStorage.getItem("highScores")) || []
 
-
 questionNumber = 1;
 playerScore = 0;
 const api = {
@@ -27,20 +26,12 @@ var playTrivia = function () {
 // After successful fetch showQuiz
 var showQuiz = function (trivia) {
 
-    //console.log("Results:" ,trivia.results)
-
     JSON.stringify(trivia.results)
     console.log(trivia.results)
-
 
     // get first trivia results object - this could be randomized 1-3
     var triviaQuestion = trivia.results[0]
 
-
-    // localStorage.setItem("triviaQuestion", JSON.stringify(trivia.results));
-    // data = JSON.parse(localStorage.getItem("triviaQuestion")) || [];
-
-    var correctAnswer = triviaQuestion
     console.log("TriviaQuestion: ", triviaQuestion)
 
     // set html data to trivia info
@@ -53,7 +44,6 @@ var showQuiz = function (trivia) {
     var incorrectIndex = 0;
 
     for (let i = 1; i < 5; i++) {
-
         // if random number = index assign button to correct answer
         if (i === randomNum) {
             var answerBtn = $("<button>").html(triviaQuestion.correct_answer).attr("class", "correct");
@@ -64,10 +54,8 @@ var showQuiz = function (trivia) {
             var answerBtn = $("<button>").html(triviaQuestion.incorrect_answers[incorrectIndex]).attr("class", "incorrect");
             incorrectIndex++;
         }
-
         // append button to buttons div
         $("#buttons").append(answerBtn);
-
     }
 }
 
@@ -84,47 +72,36 @@ $("#buttons").on("click", "button", function () {
 
     } // if incorrect answer is clicked
     else {
-
         $("#answerStatus").html("Nope, that is not the correct answer. The correct answer is: " + $(this).siblings(".correct").text());
         $("#buttons").empty();
-
     }
     questionNumber++;
     console.log(questionNumber)
-    // clear out the buttons and create a next question button
     console.log("PlayerScore: ", playerScore);
     $("#next").show()
     if (questionNumber >= 4) {
         $("#initialsForm").show();
         $("#score").html("Score: " + playerScore);
-        $("#answerStatus").text("Game Over!");
+        $("#answerStatus").show();
         $("#next").text("Play again?")
         $("#quit").show();
-
     }
 })
 
 $("#next").on("click", function () {
     $("#answerStatus").text("");
     $("#next").hide();
+    $("#initialsForm").hide()
     if (questionNumber >= 4) {
-
-
-        // $("#buttons").empty();
         playerScore = 0;
         $("#score").html("Score: " + playerScore);
         questionNumber = 0;
         $("#next").text("Next Question")
         $("#quit").hide();
-        $("#saveScore").hide();
-
     }
-
     playTrivia();
 });
 
-
-// This will be the function to call when game is quit - save score to localStorage, etc. 
 $("#quit").on("click", function () {
     $("#quizContainer").hide();
 })
@@ -135,7 +112,6 @@ $("#initialsForm").on("submit", function (event) {
 
     if (!initials) {
         return;
-
     }
     console.log(initials)
     highScores.push({ initials, score: playerScore })
@@ -154,32 +130,9 @@ $("#initialsForm").on("submit", function (event) {
     })
     highScores.splice(10)
     localStorage.setItem("highScores", JSON.stringify(highScores))
+    $("#initialsForm").hide()
+    $("#high-scores").show()
+
 })
 
-
-
-
 playTrivia();
-
-
-        //Similar to joke close code:
-        // $("#closeJokeButton").click(function () {
-        //     $("#sectionContainer").hide();
-        // });
-
-        //If play again
-        // playTrivia();
-
-
-        //if save score
-        //  //hide Leave game? | play again?
-        //  //add to localStorage and Display List
-        //      //input initials - up to three letters
-        //      //validate initials
-        //      //save to LS
-        //  //display on page in #highScores
-        //      // "clear HS" button
-        //THEN once HS are displayed
-        //  //Show  Play again? or Leave game?  Buttons
-
-        //If Leave Game

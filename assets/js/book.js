@@ -72,7 +72,7 @@ var getRandomBook = function(){
             var bookImageEl = $("<img>").attr("src", bookImage);
             
             // append all elements to content-cell div
-            $("#content-cell").append(bookTitleEl,bookAuthorEl,bookSubjectEl, bookDivEl, bookImageEl);
+            $("#content-cell").append(bookTitleEl,bookAuthorEl,bookSubjectEl,bookImageEl,bookDivEl);
             
         })
         .catch((error) => {

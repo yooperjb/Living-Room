@@ -90,4 +90,21 @@ div#content-cell {
     border-radius: 2%;
     border: none;
 }
+
+.clearscores {
+    color:white;
+    margin-top: 10px;
+    /* width: 130px; */
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 2%;
+    border: none;
+}
+
+.modal-content {
+    background-color:#f9aa4e;
+    border: solid #9a3918  2px;
+    /* border-radius: 10px;
+    -webkit-background-clip: padding-box; */
+}
 /* End Book Styles */

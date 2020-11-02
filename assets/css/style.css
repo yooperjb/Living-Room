@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-body::after {
-=======
 /* body::after {
->>>>>>> 03577d671d318db160ba15a95e0740ae24039099
     content: "";
     background: url(../images/fireplace.jpg);
     background-size: cover;
@@ -12,27 +8,6 @@ body::after {
     bottom: 0;
     right: 0;
     position: absolute;
-<<<<<<< HEAD
-    z-index: -1;
-  }
-
-body {
-    font-family: 'Courier New', Courier, monospace;
-}
-
-.welcome-banner {
-    color: #fbe9e7;
-    background-color: rgba(191, 54, 12, .8);
-    padding: 20px;
-    width: 80%;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-=======
     z-index: -1;   
 } */
 
@@ -59,31 +34,12 @@ main {
     text-align: center;
 }
 
->>>>>>> 03577d671d318db160ba15a95e0740ae24039099
 .container {
     margin-right: auto;
     margin-left: auto;
     text-align: center;
 
 }
-<<<<<<< HEAD
-
-#content-row .col {
-    border-radius: 10px;
-    margin: 10px;
-    padding: 10px;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-}
-
-#content-row {
-    display: flex;
-}
-
-a {
-    font-weight: bold;
-}
-
-=======
 
 #content-row .col {
     border-radius: 10px;
@@ -105,7 +61,6 @@ a {
 
 }
 
->>>>>>> 03577d671d318db160ba15a95e0740ae24039099
 div#content-cell {
     min-height: 0;
 }
@@ -124,25 +79,17 @@ div#content-cell {
     display: flex;
     justify-content: space-evenly;
 }
-<<<<<<< HEAD
-#bookBtnDiv button, #modalBtnDiv button {
-    margin: 10px 0px;
-    width: 110px;
-    padding: 12px;
-=======
 
 #bookBtnDiv button {
     margin: 10px 0px;
     width: 130px;
     padding: 15px;
->>>>>>> 03577d671d318db160ba15a95e0740ae24039099
     font-size: 20px;
     background-color: #9a3918;
     color:white;
     border-radius: 2%;
     border: none;
 }
-<<<<<<< HEAD
 
 .clearscores {
     color:white;
@@ -153,6 +100,12 @@ div#content-cell {
     border-radius: 2%;
     border: none;
 }
-=======
->>>>>>> 03577d671d318db160ba15a95e0740ae24039099
+
+.modal-content {
+    background-color:#f9aa4e;
+    border: solid #9a3918  2px;
+    /* border-radius: 10px;
+    -webkit-background-clip: padding-box; */
+}
+
 /* End Book Styles */

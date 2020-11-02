@@ -80,7 +80,7 @@ div#content-cell {
     justify-content: space-evenly;
 }
 
-#bookBtnDiv button {
+#bookBtnDiv button, #modalBtnDiv button{
     margin: 10px 0px;
     width: 130px;
     padding: 15px;
@@ -104,7 +104,5 @@ div#content-cell {
 .modal-content {
     background-color:#f9aa4e;
     border: solid #9a3918  2px;
-    /* border-radius: 10px;
-    -webkit-background-clip: padding-box; */
 }
 /* End Book Styles */

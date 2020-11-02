@@ -5,7 +5,7 @@ $("#read-button").on("click", function() {
     
     // clear out div contents, loadbooks, getrandomBook
     $("#content-cell").empty();
-    $("#sectionContainer").hide();
+    //$("#sectionContainer").hide();
     loadBooks();
     getRandomBook();
 });
@@ -15,7 +15,6 @@ var getRandomBook = function(){
 
     // get random number in range of books
     randNum = Math.floor(Math.random()*63485);
-    console.log(randNum);
 
     // fetch book from gutendex api
     fetch("https://gutendex.com/books/"+randNum)
@@ -101,7 +100,7 @@ var loadBooks = function() {
     
     // create list item for each saved item
     $.each(books, function(key,value){
-        //console.log(key,value);
+        
         var bookItemEl = $("<a>").text(key).attr({class: "modal-trigger collection-item", href:"#modal1"});
         bookListDivEl.append(bookItemEl);
     })
@@ -116,6 +115,16 @@ $("#bookshelf").on("click", "a", function(event){
     console.log(text);
   });
 
+// modal read button
+$("#read").on("click", function(){
+    // get book title from h4 element
+    var bookTitle = $(".modal-content").find("h4").text();
+
+    // get url from books obj
+    var bookURL = books[bookTitle];
+    window.open(bookURL, "_blank");
+  });
+
 // modal remove button
 $("#remove").on("click", function(){
     // get book title from h4 element
@@ -125,14 +134,4 @@ $("#remove").on("click", function(){
     localStorage.setItem("books", JSON.stringify(books));
     // reload books in library
     loadBooks();
-  })
-
-  // modal read button
-$("#read").on("click", function(){
-    // get book title from h4 element
-    var bookTitle = $(".modal-content").find("h4").text();
-
-    // get url from books obj
-    var bookURL = books[bookTitle];
-    window.open(bookURL, "_blank");
-  });
+})

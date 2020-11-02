@@ -10,11 +10,6 @@ var grabJoke = function() {
         console.log($("#fetchedJoke".text));
 };
 
-// Exit the joke section //
-$("#closeJokeButton").click(function () {
-    $("#sectionContainer").hide();
-});
-
 // Joke activity to make it visible //
 $("#joke-button").click(function () {
     $("#content-cell").empty();
@@ -25,7 +20,6 @@ $("#joke-button").click(function () {
     var jokeButtonEl = $("<button>").text("Get Joke").attr({ id: "jokeButton", class: "jokeButton orange darken-4 z-depth-2 waves-effect waves-light hoverable" });
     var closeJokeButtonEl = $("<button>").text("Exit").attr({ id: "closeJokeButton", class: "jokeButton orange darken-4 z-depth-2 waves-effect waves-light hoverable" });
     $("#sectionContainer").show();
-    $('#sectionContainer').css('display', 'flex');
     $("#content-cell").append(sectionContainerEL);
     sectionContainerEL.append(jokeContainerEL);
     jokeContainerEL.append(jokeTextEl, jokeButtonEl, closeJokeButtonEl);
@@ -33,4 +27,11 @@ $("#joke-button").click(function () {
 });
 
 // Go to the next joke //
-$("#jokeButton").click(grabJoke);
+$("#jokeButton").on("click", function () {
+    grabJoke();
+});
+
+// Exit the joke section //
+$("#closeJokeButton").on("click", function () {
+    $("#content-cell").empty();
+});

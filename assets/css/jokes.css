@@ -3,7 +3,7 @@ section{
     min-height: 90vh;
     width: 100%;
     padding: 50px 0;
-    display: none;
+    display: flex;
     /* display: flex; */
     /* visibility: hidden; */
     align-items: center;

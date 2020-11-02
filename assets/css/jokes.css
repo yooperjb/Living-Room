@@ -3,7 +3,11 @@ section{
     min-height: 90vh;
     width: 100%;
     padding: 50px 0;
+<<<<<<< HEAD
     display: flex;
+=======
+    display: none;
+>>>>>>> 03577d671d318db160ba15a95e0740ae24039099
     /* display: flex; */
     /* visibility: hidden; */
     align-items: center;

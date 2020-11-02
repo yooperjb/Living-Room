@@ -49,11 +49,6 @@ a {
     font-weight: bold;
 }
 
-.storage-div li {
-    border-bottom: solid 1px #ffccbc;
-
-}
-
 div#content-cell {
     min-height: 0;
 }
@@ -72,15 +67,17 @@ div#content-cell {
     display: flex;
     justify-content: space-evenly;
 }
-
-#bookBtnDiv button {
+#bookBtnDiv button, #modalBtnDiv button {
     margin: 10px 0px;
-    width: 130px;
-    padding: 15px;
+    width: 110px;
+    padding: 12px;
     font-size: 20px;
     background-color: #9a3918;
     color:white;
     border-radius: 2%;
     border: none;
+}
+.storage-div li {
+    border-bottom: solid 1px #ffccbc;
 }
 /* End Book Styles */

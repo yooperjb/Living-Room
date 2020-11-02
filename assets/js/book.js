@@ -1,4 +1,3 @@
-
 var books = {};
 
 // When the read button is clicked
@@ -59,11 +58,15 @@ var getRandomBook = function(){
             var readButtonEl = $("<button>").text("Read").attr({id: "readBtn",class:"orange darken-4 z-depth-2 waves-effect waves-light hoverable"}).on("click", function(){
                 window.open(bookURL, "_blank");
             });
+            var nextButtonEl = $("<button>").text("Next").attr({id: "readBtn",class:"orange darken-4 z-depth-2 waves-effect waves-light hoverable"}).on("click", function(){
+                $("#content-cell").empty();
+                getRandomBook();
+            });
             var saveButtonEl = $("<button>").text("Save").attr({id: "saveBtn",class:"orange darken-4 z-depth-2 waves-effect waves-light hoverable"}).on("click", function(){
                 saveBook(bookTitle,bookURL);
             });
             
-            var bookDivEl = $("<div>").attr("id", "bookBtnDiv").append(readButtonEl,saveButtonEl);
+            var bookDivEl = $("<div>").attr("id", "bookBtnDiv").append(readButtonEl,nextButtonEl,saveButtonEl);
 
             // book image
             var bookImageEl = $("<img>").attr("src", bookImage);
@@ -90,22 +93,33 @@ var saveBook = function(title,url) {
 // load books from localStorage
 var loadBooks = function() {
     
-    books = JSON.parse(localStorage.getItem("books"));
+    // check content of books in localStorage
+    books = JSON.parse(localStorage.getItem("books")) || {};
     $("#bookshelf").empty();
-    var bookShelfListEl = $("<ul>");
-    
-    // if localStorage is empty create empty object
-    if (!books) {
-        books = {};
-    }
     
     // create list item for each saved item
     $.each(books, function(key,value){
-        console.log(key,value);
-        var bookItemEl = $("<li>").text(key);
-        bookShelfListEl.append(bookItemEl);
+        //console.log(key,value);
+        var bookItemEl = $("<a>").text(key).attr({class: "highlight modal-trigger", href:"#modal1"});
+        $("#bookshelf").append(bookItemEl);
     })
-
-    
-    $("#bookshelf").append(bookShelfListEl);
 };
+
+// open modal with book info
+$("#bookshelf").on("click", "a", function(event){
+    var text = $(this).text();
+    $("#modal1").find("h4").text(text);
+    $('.modal').modal();
+    console.log(text);
+  });
+
+// modal remove button
+$("#remove").on("click", function(){
+    // get book title from h4 element
+    var bookTitle = $(".modal-content").find("h4").text();
+    // remove key in books object and save to localStorage
+    delete books[bookTitle];
+    localStorage.setItem("books", JSON.stringify(books));
+    // reload books in library
+    loadBooks();
+  })

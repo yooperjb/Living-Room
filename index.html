@@ -69,11 +69,24 @@
                                 Score?</button>
                         </div>
 
-                        <form id="initialsForm" class="initialsform" hidden>
-                            <p></p>
-                            <!-- <input id="inputInitials" name="inputInitials" minlength="2" maxlength="2" type="text" required> -->
+                        <!-- <form id="initialsForm" class="initialsform" hidden>
+                            <p></p> -->
+                        <!-- <input id="inputInitials" name="inputInitials" minlength="2" maxlength="2" type="text" required> -->
 
-                            <div class="input-field col s5 ">
+
+                        <form id="initialsForm" hidden>
+                            <p>Enter two initials please</p>
+                            <input id="inputInitials" name="inputInitials" minlength="2" maxlength="2" type="text"
+                                required>
+                            <button type="submit"
+                                class="trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable">Submit</button>
+                            </p>
+                            <br>
+                            <p id="validate"></p>
+                        </form>
+
+
+                        <!-- <div class="input-field col s5 ">
                                 <input id="inputInitials" name="inputInitials" data-length="2" type="text"
                                     class="validate input-field">
                                 <label for="inputInitials" class="input-field">Enter two initials
@@ -84,7 +97,7 @@
                             </p>
                             <br>
                             <p id="validate"></p>
-                        </form>
+                        </form> -->
                     </div>
                     <!--End Content Container -->
                 </div>

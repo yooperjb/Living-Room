@@ -80,7 +80,7 @@ div#content-cell {
     justify-content: space-evenly;
 }
 
-#bookBtnDiv button {
+#bookBtnDiv button, #modalBtnDiv button{
     margin: 10px 0px;
     width: 130px;
     padding: 15px;
@@ -104,8 +104,69 @@ div#content-cell {
 .modal-content {
     background-color:#f9aa4e;
     border: solid #9a3918  2px;
-    /* border-radius: 10px;
-    -webkit-background-clip: padding-box; */
 }
+<<<<<<< HEAD
 
 /* End Book Styles */
+=======
+/* End Book Styles */
+/*Trivia Styles */
+
+
+
+.storage-div {
+    height: auto;
+}
+
+.high-scores {
+        display: flex; 
+        justify-content: center; 
+        height: auto;
+        
+}
+
+.clearscores {
+    color:white;
+    margin-top: 10px;
+    /* width: 130px; */
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 2%;
+    border: none;
+    align-self: flex-end;
+    flex: 1;
+}
+
+.trivia-button {
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 15px;
+    font-size: 20px;
+    background-color: #9a3918;
+    color:white;
+    border-radius: 2%;
+    border: none;
+}
+
+.quiz-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.initialsform {
+    display: flex;
+    justify-content: center; 
+    display: none;
+} 
+
+ /* label focus color */
+ .input-field input[type=text]:focus + label {
+    color: #000;
+}
+/* label underline focus color */
+  .input-field input[type=text]:focus {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+  }
+>>>>>>> ff5337eccddb8cb0c041814c370d3bb96cbf6033

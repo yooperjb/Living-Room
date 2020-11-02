@@ -2,7 +2,7 @@ var highScores = JSON.parse(localStorage.getItem("highScores")) || []
 
 $("#trivia-button").on("click", function () {
 
-    $("#content-cell").empty();
+    // $("#content-cell").empty();
     $(".trivia-content").show();
     $("#sectionContainer").hide();
     $("#quizContainer").show();
@@ -31,7 +31,7 @@ var playTrivia = function () {
 
         // if an error is caught - Display something to page here
         .catch((error) => {
-            $("#error").html("There is an error with the API.")
+            error = $("#error").html("There is an error with the API.")
         });
 };
 
@@ -44,10 +44,12 @@ var showQuiz = function (trivia) {
     var triviaQuestion = trivia.results[0]
 
     // set html data to trivia info
-    $("#score").html("Score: " + playerScore);
-    $("#category").html("Category: " + triviaQuestion.category);
-    $("#difficulty").html("Difficulty: " + triviaQuestion.difficulty);
-    $("#question").html("Question " + questionNumber + ":&nbsp;" + triviaQuestion.question);
+    $("#triviaHeader").show().html("Play Trivia!")
+    $("#score").html("<h4>Score: " + playerScore) + "</h4>";
+    $("#category").html("<h5>Category: " + triviaQuestion.category + "</h5>"
+    );
+    $("#difficulty").html("<h6>Difficulty: " + triviaQuestion.difficulty) + "</h6>";
+    $("#question").html("<style='text-align:left'><b>Question " + questionNumber + ":&nbsp;" + triviaQuestion.question + "</b></style>");
 
     var randomNum = Math.floor(Math.random() * 4 + 1);
     var incorrectIndex = 0;
@@ -55,44 +57,44 @@ var showQuiz = function (trivia) {
     for (let i = 1; i < 5; i++) {
         // if random number = index assign button to correct answer
         if (i === randomNum) {
-            var answerBtn = $("<button>").html(triviaQuestion.correct_answer).attr("class", "correct");
+            var answerBtn = $("<button>").html(triviaQuestion.correct_answer).addClass("correct orange darken-4 z-depth-2 waves-effect waves-light hoverable trivia-button");
         }
 
         // assign button to incorrect answer
         else {
-            var answerBtn = $("<button>").html(triviaQuestion.incorrect_answers[incorrectIndex]).attr("class", "incorrect");
+            var answerBtn = $("<button>").html(triviaQuestion.incorrect_answers[incorrectIndex]).addClass("incorrect orange darken-4 z-depth-2 waves-effect waves-light hoverable trivia-button");
             incorrectIndex++;
         }
         // append button to buttons div
-        $("#buttons").append(answerBtn);
+        $("#quizButtons").append(answerBtn);
     }
 }
 
 // When answer button is clicked check for answer
-$("#buttons").on("click", "button", function () {
+$("#quizButtons").on("click", "button", function () {
     var buttonClass = $(this).attr("class");
 
     // if correct answer is clicked
     if (buttonClass === "correct") {
         $("#answerStatus").text("That is the correct answer!");
         playerScore++;
-        $("#score").html("Score: " + playerScore);
-        $("#buttons").empty();
+        $("#score").html("<h4>Score: " + playerScore) + "</h4>";
+        $("#quizButtons").empty();
 
     } // if incorrect answer is clicked
     else {
         $("#answerStatus").html("Nope, that is not the correct answer. The correct answer is: " + $(this).siblings(".correct").text());
-        $("#buttons").empty();
+        $("#quizButtons").empty();
     }
     //Advance Question and Score
     questionNumber++;
-    $("#next").show()
+    $("#next").show().text("Next Question").addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable")
     if (questionNumber >= 4) {
         $("#initialsForm").show();
-        $("#score").html("Score: " + playerScore);
+        $("#score").html("<h4>Score: " + playerScore) + "</h4>";
         $("#answerStatus").show();
-        $("#next").text("Play again?")
-        $("#quit").show();
+        $("#next").text("Play again?").addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable");
+        $("#quit").show().addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable");
     }
 })
 
@@ -102,9 +104,9 @@ $("#next").on("click", function () {
     $("#initialsForm").hide()
     if (questionNumber >= 4) {
         playerScore = 0;
-        $("#score").html("Score: " + playerScore);
+        $("#score").html("<h4>Score: " + playerScore) + "</h4>";
         questionNumber = 0;
-        $("#next").text("Next Question")
+        $("#next").text("Next Question").addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable")
         $("#quit").hide();
     }
     playTrivia();
@@ -120,6 +122,10 @@ $("#initialsForm").on("submit", function (event) {
     var initials = $(this).children("input").val()
     var patt = new RegExp("^[a-zA-Z]+$");
     var res = patt.test(initials);
+
+    // $(document).ready(function () {
+    //     $('input#input_text, textarea#textarea2').characterCounter();
+    // });
 
     if (!initials || initials.length > 3 || !res) {
         $("#inputInitials").val("Please enter two letters.")
@@ -163,7 +169,6 @@ var loadScores = function () {
     $("#clearScores").show();
 
     $("#clearScores").on("click", function () {
-        $("<li>").remove()
         $("#scoreDisplay").empty();
         highScores = []
         localStorage.setItem("highScores", JSON.stringify(highScores))

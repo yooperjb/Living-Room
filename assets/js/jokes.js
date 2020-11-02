@@ -19,7 +19,7 @@ $("#joke-button").click(function () {
     var jokeTextEl = $("<p>").attr({ id:"fetchedJoke"});
     var jokeButtonEl = $("<button>").text("Get Joke").attr({ id: "jokeButton", class: "jokeButton orange darken-4 z-depth-2 waves-effect waves-light hoverable" });
     var closeJokeButtonEl = $("<button>").text("Exit").attr({ id: "closeJokeButton", class: "jokeButton orange darken-4 z-depth-2 waves-effect waves-light hoverable" });
-    $("#sectionContainer").show();
+    // $("#sectionContainer").show();
     $("#content-cell").append(sectionContainerEL);
     sectionContainerEL.append(jokeContainerEL);
     jokeContainerEL.append(jokeTextEl, jokeButtonEl, closeJokeButtonEl);

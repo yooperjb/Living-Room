@@ -1,6 +1,6 @@
 var books = {};
 
-// When the read button is clicked
+// When the main read button is clicked
 $("#read-button").on("click", function() {
     
     // clear out div contents, loadbooks, getrandomBook
@@ -85,6 +85,7 @@ var getRandomBook = function(){
 // Save book to localStorage
 var saveBook = function(title,url) {
     
+    // add book title and url to books object
     books[title] = url;
     localStorage.setItem("books", JSON.stringify(books));
     loadBooks();
@@ -96,13 +97,15 @@ var loadBooks = function() {
     // check content of books in localStorage
     books = JSON.parse(localStorage.getItem("books")) || {};
     $("#bookshelf").empty();
+    var bookListDivEl = $("<div>").attr("class", "collection");
     
     // create list item for each saved item
     $.each(books, function(key,value){
         //console.log(key,value);
-        var bookItemEl = $("<a>").text(key).attr({class: "highlight modal-trigger", href:"#modal1"});
-        $("#bookshelf").append(bookItemEl);
+        var bookItemEl = $("<a>").text(key).attr({class: "modal-trigger collection-item", href:"#modal1"});
+        bookListDivEl.append(bookItemEl);
     })
+    $("#bookshelf").append(bookListDivEl);
 };
 
 // open modal with book info
@@ -123,3 +126,13 @@ $("#remove").on("click", function(){
     // reload books in library
     loadBooks();
   })
+
+  // modal read button
+$("#read").on("click", function(){
+    // get book title from h4 element
+    var bookTitle = $(".modal-content").find("h4").text();
+
+    // get url from books obj
+    var bookURL = books[bookTitle];
+    window.open(bookURL, "_blank");
+  });

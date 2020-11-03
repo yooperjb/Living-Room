@@ -35,7 +35,7 @@
                     id="trivia-button">Trivia</a>
             </div>
         </div>
-        
+
         <!--Begin Content Row-->
         <div class="row" id="content-row">
             <div class="col s3 orange darken-3 storage-div" id="bookshelf">
@@ -43,107 +43,86 @@
             </div>
             <!--Begin Content Row-->
             <!-- <div class="row" id="content-row"> -->
-                <!-- <div class="col s3 orange darken-3 storage-div" id="bookshelf">
+            <!-- <div class="col s3 orange darken-3 storage-div" id="bookshelf">
                     Bookshelf
                 </div> -->
-                <div class="col s6 orange lighten-2 triva-content" id="content-cell">
-                    <!-- Content Container-->
+            <div class="col s6 orange lighten-2 triva-content" id="content-cell">
+                <!-- Content Container-->
 
-                    <!-- <div id="quizContainer" class="quiz" hidden">
-                        <h4 id="triviaHeader" hidden></h4>
-                        <p id="error" hidden></p>
-                        <p id="score"></p>
-                        <p id="category"></p>
-                        <p id="difficulty"></p>
-                        <p id="question"></p>
-                        <div id="quizButtons" class="quiz-buttons">
+                <div id="quizContainer" class="quiz" hidden">
+                    <h4 id="triviaHeader" hidden></h4>
+                    <p id="error" hidden></p>
+                    <p id="score"></p>
+                    <p id="category"></p>
+                    <p id="difficulty"></p>
+                    <p id="question"></p>
+                    <div id="quizButtons" class="quiz-buttons">
 
-                        </div>
-                        <p id="answerStatus"></p>
-                        <p id="gameOver" hidden>Game Over!</p>
-                        <div>
-                            <button hidden id="next"></button>
-                            <button hidden id="quit">Quit?</button>
-                            <button hidden id="saveScore">Save
-                                Score?</button>
-                        </div>
+                    </div>
+                    <p id="answerStatus"></p>
+                    <p id="gameOver" hidden>Game Over!</p>
+                    <div>
+                        <button hidden id="next"></button>
+                        <button hidden id="quit">Quit?</button>
+                        <button hidden id="saveScore">Save
+                            Score?</button>
+                    </div>
 
-                        <form id="initialsForm" class="initialsform" hidden>
-                            <p></p> -->
-                        <!-- <input id="inputInitials" name="inputInitials" minlength="2" maxlength="2" type="text" required> -->
-
-
-                        <!-- <form id="initialsForm" hidden>
-                            <p>Enter two initials please</p>
-                            <input id="inputInitials" name="inputInitials" minlength="2" maxlength="2" type="text"
-                                required>
-                            <button type="submit"
-                                class="trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable">Submit</button>
-                            </p>
-                            <br>
-                            <p id="validate"></p>
-                        </form> -->
+                    <form id="initialsForm" hidden>
+                        <p>Enter two initials please</p>
+                        <input id="inputInitials" name="inputInitials" minlength="2" maxlength="2" type="text" required>
+                        <button type="submit"
+                            class="trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable">Submit</button>
+                        </p>
+                        <br>
+                        <p id="validate"></p>
+                    </form>
 
 
-                        <!-- <div class="input-field col s5 ">
-                                <input id="inputInitials" name="inputInitials" data-length="2" type="text"
-                                    class="validate input-field">
-                                <label for="inputInitials" class="input-field">Enter two initials
-                                    please</label>
-                            </div>
-                            <button type="submit"
-                                class="trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable">Submit</button>
-                            </p>
-                            <br>
-                            <p id="validate"></p>
-                        </form> -->
-                    <!-- </div> -->
                     <!--End Content Container -->
                 </div>
 
-                <div class="col s3 orange darken-3 storage-div" id="high-scores">
-                <!-- hidden> -->
-                    <h3>High Scores</h3>
-                    <div id="scoreDisplay" class="high-scores"></div>
-                    <button id="clearScores"
-                        class="hoverable clearscores orange lighten-2 hoverable waves-effect waves-light" hidden>Clear
-                        High Scores</button>
-                </div>
-            <!-- </div> -->
 
-            <!-- <div class="col s3 orange darken-3 storage-div" id="high-scores" hidden>
+            </div>
+
+            <div class="col s3 orange darken-3 storage-div" id="high-scores" hidden>
                 <h4>High Scores</h3>
-                    <div id="scoreDisplay"></div>
+                    <div id="scoreDisplay">
+
+                    </div>
                     <button id="clearScores"
                         class="hoverable clearscores orange lighten-2 hoverable waves-effect waves-light" hidden>Clear
                         High Scores</button>
-            </div> -->
-        </div>
-        
-        <!-- Modal Content -->
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-              <h4></h4>
-              <div id="modalBtnDiv">
-                <button id="read" class="orange darken-4 z-depth-2 waves-effect waves-light hoverable">Read</button>
-                <button id="remove" class="orange darken-4 z-depth-2 waves-effect waves-light hoverable">Remove</button>
-                <button id="close" class="orange darken-4 z-depth-2 waves-effect waves-light hoverable modal-close">Close</button>
-              </div>
+            </div>
+
+
+            <!-- Modal Content -->
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <h4></h4>
+                    <div id="modalBtnDiv">
+                        <button id="read"
+                            class="orange darken-4 z-depth-2 waves-effect waves-light hoverable">Read</button>
+                        <button id="remove"
+                            class="orange darken-4 z-depth-2 waves-effect waves-light hoverable">Remove</button>
+                        <button id="close"
+                            class="orange darken-4 z-depth-2 waves-effect waves-light hoverable modal-close">Close</button>
+                    </div>
+                </div>
+                <!-- End Modal Content -->
+
             </div>
             <!-- End Modal Content -->
 
         </div>
-        <!-- End Modal Content -->
 
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="./assets/js/book.js"></script>
-    <script src="./assets/js/jokes.js"></script>
-    <!-- <script src="./assets/js/trivia.js"></script> -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="./assets/js/book.js"></script>
+        <script src="./assets/js/jokes.js"></script>
+        <script src="./assets/js/trivia.js"></script>
 </body>
 
 </html>

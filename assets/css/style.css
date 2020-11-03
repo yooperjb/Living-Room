@@ -1,5 +1,8 @@
 body {
     font-family: 'Courier New', Courier, monospace;
+    background-image: url("../images/fireplace3.jpg");
+    background-size: cover;
+
 }
 
 /* header styles */
@@ -17,7 +20,7 @@ body {
 
 /* main parent grid styles */
 main {
-    background-image: url("../images/fireplace.jpg");
+    
     width: 100%;
     min-height: 700px;
     background-size: cover;

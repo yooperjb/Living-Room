@@ -85,6 +85,7 @@ h4 {
 
 h5 {
     font-weight: 600;
+    color:#ef6c00;
 }
 
 .middleH4 {
@@ -121,16 +122,35 @@ h5 {
     height: auto;
 }
 
-#score h4 { 
+
+
+.quiz p {
+    font-size: 20px;
+    font-weight: 600;
     color:#000;
+}
+
+p .answer-status {
+    color: #812d12;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.quiz h6 {
+    color: #812d12;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+#score h4 { 
+    color:#812d12;
     font-weight: 200;
 }
 
 .high-scores {
         display: flex; 
         justify-content: center; 
-        height: auto;
-        
+        height: auto;   
 }
 
 .clearscores {
@@ -159,13 +179,21 @@ h5 {
 .quiz-buttons {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .initialsform {
+    margin-top: 20px;
     display: flex;
     justify-content: center; 
     display: none;
 } 
+
+p .initials {
+    font-size: 10px;
+    color: #000;
+    font-style: italic;
+}
 
   input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
     background-color: white !important;
@@ -174,10 +202,15 @@ h5 {
     box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01), 0px 0px 8px rgba(0, 0, 0, 0.2);
     border-radius: 2%;
     outline: 2px solid orange !important;
-    height: 2rem;
-    width: 100%;
-    font-size: 16px;
+    height: 2rem !important;
+    width: 150px !important;
+    padding: 2px ;
+    text-align:center;
 }
+
+::placeholder {
+    color: #666;
+  }
 
 /* end trivia styles */
 
@@ -207,7 +240,6 @@ section{
 }
 .jokeContainer p{
     font-size: 20px;
-    font-weight: 300;
     line-height: 25px;
     min-height: 80px;
     text-align: justify;

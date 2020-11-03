@@ -45,10 +45,10 @@ var showQuiz = function (trivia) {
 
     // set html data to trivia info
     $("#triviaHeader").show().html("Play Trivia!")
-    $("#score").html("<h4 class='middleH4'>Score: " + playerScore) + "</h4>";
-    $("#category").html("<h5>Category: " + triviaQuestion.category + "</h5>"
+    $("#score").html("Score: " + playerScore);
+    $("#category").html(triviaQuestion.category
     );
-    $("#difficulty").html("<h6>Difficulty: " + triviaQuestion.difficulty) + "</h6>";
+    $("#difficulty").html(triviaQuestion.difficulty + " difficulty");
     $("#question").html("<style='text-align:left'><b>Question " + questionNumber + ":&nbsp;" + triviaQuestion.question + "</b></style>");
 
     var randomNum = Math.floor(Math.random() * 4 + 1);
@@ -90,7 +90,7 @@ $("#quizButtons").on("click", "button", function () {
     $("#next").show().text("Next Question").addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable")
     if (questionNumber >= 4) {
         $("#initialsForm").show();
-        $("#score").html("<h4>Score: " + playerScore) + "</h4>";
+        $("#score").html("Score: " + playerScore);
         $("#answerStatus").show();
         $("#next").text("Play again?").addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable");
         $("#quit").show().addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable");
@@ -103,7 +103,7 @@ $("#next").on("click", function () {
     $("#initialsForm").hide()
     if (questionNumber >= 4) {
         playerScore = 0;
-        $("#score").html("<h4>Score: " + playerScore) + "</h4>";
+        $("#score").html("Score: " + playerScore);
         questionNumber = 0;
         $("#next").text("Next Question").addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable")
         $("#quit").hide();
@@ -127,7 +127,7 @@ $("#initialsForm").on("submit", function (event) {
     // });
 
     if (!initials || initials.length > 3 || !res) {
-        $("#inputInitials").val("Please enter two letters.")
+        $("#inputInitials").val("Initials only")
         return;
     }
 

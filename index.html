@@ -52,25 +52,26 @@
                 <div id="quizContainer" class="quiz" hidden">
                     <h4 id="triviaHeader" class="middleH4" hidden></h4>
                     <p id="error" hidden></p>
-                    <p id="score"></p>
-                    <p id="category"></p>
-                    <p id="difficulty"></p>
+                    <h5 class='middleH5' id="score"></h5>
+                    <h6 id="category" class="quiz-category"></h6>
+                    <h6 id="difficulty" class="quiz-category"></h6>
                     <p id="question"></p>
                     <div id="quizButtons" class="quiz-buttons">
 
                     </div>
-                    <p id="answerStatus"></p>
+                    <p id="answerStatus" class="answer-status"></p>
                     <p id="gameOver" hidden>Game Over!</p>
                     <div>
                         <button hidden id="next"></button>
                         <button hidden id="quit">Quit?</button>
                         <button hidden id="saveScore">Save
-                            Score?</button>
+                            Score?</button><br>
                     </div>
 
-                    <form id="initialsForm" hidden>
-                        <p>Enter two initials please</p>
-                        <input id="inputInitials" name="inputInitials" minlength="2" maxlength="2" type="text" required>
+                    <form id="initialsForm" class="initialsform" hidden>
+                        <input id="inputInitials" placeholder="Two initials please" name="inputInitials" minlength="2"
+                            maxlength="2" type="text" required>
+                        <br />
                         <button type="submit"
                             class="trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable">Submit</button>
                         </p>

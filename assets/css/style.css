@@ -81,7 +81,6 @@ h2 {
 h4 {
     color: #ffb74d;
     font-weight: 600;
-
 }
 
 h5 {
@@ -110,7 +109,6 @@ h5 {
     border: none;
 }
 
-
 .modal-content {
     background-color:#f9aa4e;
     border: solid #9a3918  2px;
@@ -121,6 +119,11 @@ h5 {
 /*Trivia Styles */
 .storage-div {
     height: auto;
+}
+
+#score h4 { 
+    color:#000;
+    font-weight: 200;
 }
 
 .high-scores {
@@ -164,15 +167,17 @@ h5 {
     display: none;
 } 
 
- /* label focus color */
- .input-field input[type=text]:focus + label {
-    color: #000;
+  input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+    background-color: white !important;
+    border: 0 !important;
+    border-bottom: 0 !important;
+    box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01), 0px 0px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 2%;
+    outline: 2px solid orange !important;
+    height: 2rem;
+    width: 100%;
+    font-size: 16px;
 }
-/* label underline focus color */
-  .input-field input[type=text]:focus {
-    border-bottom: 1px solid #000;
-    box-shadow: 0 1px 0 0 #000;
-  }
 
 /* end trivia styles */
 

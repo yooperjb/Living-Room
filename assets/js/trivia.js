@@ -2,18 +2,41 @@ var highScores = JSON.parse(localStorage.getItem("highScores")) || []
 
 $("#trivia-button").on("click", function () {
 
-    // $("#content-cell").empty();
+    $("#content-cell").empty();
     // $(".trivia-content").show();
     // $("#sectionContainer").hide();
     // $("#quizContainer").show();
     var quizContainerEl = $("<div>").attr({ id: "quizContainer", class: "quiz" });
     var triviaHeaderEL = $("<h4>").attr({ id: "triviaHeader" });
+   
     var errorEl = $("<p>").attr({ id: "error" });
     var scoreEl = $("<p>").attr({ id: "score" });
     var categoryEl = $("<p>").attr({ id: "category" });
     var difficultyEl = $("<p>").attr({ id: "difficulty" });
     var questionEl = $("<p>").attr({ id: "question" });
-    var quizButtonsEl = $("<div>").attr({ id: "quizButtons", class: "quiz-buttons" });
+    var quizButtonsEl = $("<div>").attr({ id: "quizButtons", class: "quiz-buttons" }).on("click", quizButtons ());
+    var divPEl = $("<div>").attr({ id: "divP" });
+    var answerStatusEl = $("<p>").attr({ id: "answerStatus" });
+    var gameOverEl = $("<p>").text("Game Over!").attr({ id: "gameOver" });
+    var divButtonEl = $("<div>");
+    var buttonNextEl = $("<button>").attr({ id: "next" }).on("click", next());
+    var buttonQuitEl = $("<button>").text("Quit?").attr({ id: "quit" }).on("click", function () {
+        $("#content-cell").empty()});
+    var buttonSaveScoreEl = $("<button>").text("Save Score?").attr({ id: "saveScore" });
+    var initialsFormEl = $("<form>").attr({ id: "initialsForm" }).on("submit", initialsForm());
+    var pFormEl = $("<p>").text("Enter two initials please");
+    var inputInitialsEl = $("<input>").attr({ id: "inputInitials", name: "inputInitials", minlength: "2", maxlength: "2", type: "text" });
+    var buttonSubmitEl = $("<button>").text("Submit").attr({ id: "submit", class: "trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable" });
+    var pValidateEl = $("<p>").attr({ id: "validate" });
+    
+    // putting child into form //
+    initialsFormEl.append(pFormEl, inputInitialsEl, buttonSubmitEl, pValidateEl);
+    // putting buttons into div //
+    divButtonEl.append(buttonNextEl, buttonQuitEl, buttonSaveScoreEl);
+    // appending elements to quiz container //
+    quizContainerEl.append(triviaHeaderEL, errorEl, scoreEl, categoryEl, difficultyEl, questionEl, quizButtonsEl, divPEl, answerStatusEl, gameOverEl, divButtonEl, initialsFormEl);
+    
+    $("#content-cell").append(quizContainerEl);
 
     playTrivia();
 });
@@ -76,9 +99,9 @@ var showQuiz = function (trivia) {
         $("#quizButtons").append(answerBtn);
     }
 }
-
+var quizButtons = function () {
 // When answer button is clicked check for answer
-$("#quizButtons").on("click", "button", function () {
+// $("#quizButtons").on("click", "button", function () {
     var buttonClass = $(this).attr("class");
 
     // if correct answer is clicked
@@ -103,9 +126,9 @@ $("#quizButtons").on("click", "button", function () {
         $("#next").text("Play again?").addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable");
         $("#quit").show().addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable");
     }
-})
-
-$("#next").on("click", function () {
+}
+var next = function () {
+// $("#next").on("click", function () {
     $("#answerStatus").text("");
     $("#next").hide();
     $("#initialsForm").hide()
@@ -117,14 +140,14 @@ $("#next").on("click", function () {
         $("#quit").hide();
     }
     playTrivia();
-});
+};
 
-$("#quit").on("click", function () {
-    $("#quizContainer").hide();
-})
-
-$("#initialsForm").on("submit", function (event) {
-    event.preventDefault();
+// $("#quit").on("click", function () {
+//     $("#quizContainer").hide();
+// })
+var initialsForm = function () {
+// $("#initialsForm").on("submit", function (event) {
+    // event.preventDefault();
 
     var initials = $(this).children("input").val()
     var patt = new RegExp("^[a-zA-Z]+$");
@@ -159,7 +182,7 @@ $("#initialsForm").on("submit", function (event) {
     $("#high-scores").show()
     // $(highScores).removeData()
     loadScores();
-})
+}
 
 // load High Scores from localStorage
 var loadScores = function () {

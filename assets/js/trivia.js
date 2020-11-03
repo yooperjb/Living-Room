@@ -3,10 +3,17 @@ var highScores = JSON.parse(localStorage.getItem("highScores")) || []
 $("#trivia-button").on("click", function () {
 
     // $("#content-cell").empty();
-    $(".trivia-content").show();
-    $("#sectionContainer").hide();
-    $("#quizContainer").show();
-
+    // $(".trivia-content").show();
+    // $("#sectionContainer").hide();
+    // $("#quizContainer").show();
+    var quizContainerEl = $("<div>").attr({ id: "quizContainer", class: "quiz" });
+    var triviaHeaderEL = $("<h4>").attr({ id: "triviaHeader" });
+    var errorEl = $("<p>").attr({ id: "error" });
+    var scoreEl = $("<p>").attr({ id: "score" });
+    var categoryEl = $("<p>").attr({ id: "category" });
+    var difficultyEl = $("<p>").attr({ id: "difficulty" });
+    var questionEl = $("<p>").attr({ id: "question" });
+    var quizButtonsEl = $("<div>").attr({ id: "quizButtons", class: "quiz-buttons" });
 
     playTrivia();
 });

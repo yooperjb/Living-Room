@@ -16,7 +16,7 @@ The Living Room utilizes three unique server-side APIs. The first uses Gutendex 
 This project was created by the following developers.
 
 * [Calista Mayer](https://github.com/calistamayer)
-* [Danielle](https://github.com/webprinc3ss)
+* [Danielle Branton](https://github.com/webprinc3ss)
 * [Anthone Kieu](https://github.com/anthonykieu)
 * [Jason Barnes](https://github.com/yooperjb)
 

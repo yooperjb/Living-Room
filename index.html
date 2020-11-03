@@ -27,10 +27,11 @@
                     id="read-button">Read</a>
             </div>
             <div class="col s4">
-                <a class="hoverable waves-effect waves-light btn-large deep-orange darken-4" id="joke-button">Joke</a>
+                <a class="hoverable waves-effect waves-light btn-large deep-orange darken-4 scale-transition"
+                    id="joke-button">Joke</a>
             </div>
             <div class="col s4">
-                <a class="hoverable waves-effect waves-light btn-large deep-orange darken-4"
+                <a class="hoverable waves-effect waves-light btn-large deep-orange darken-4 scale-transition"
                     id="trivia-button">Trivia</a>
             </div>
         </div>
@@ -49,7 +50,7 @@
                 <!-- Content Container-->
 
                 <div id="quizContainer" class="quiz" hidden">
-                    <h4 id="triviaHeader" hidden></h4>
+                    <h4 id="triviaHeader" class="middleH4" hidden></h4>
                     <p id="error" hidden></p>
                     <p id="score"></p>
                     <p id="category"></p>
@@ -90,7 +91,8 @@
 
                 </div>
                 <button id="clearScores"
-                    class="hoverable clearscores orange lighten-2 hoverable waves-effect waves-light" hidden>Clear
+                    class="hoverable clearscores orange lighten-2 hoverable waves-effect waves-light z-depth-2"
+                    hidden>Clear
                     High Scores</button>
             </div>
 
@@ -98,7 +100,7 @@
             <!-- Modal Content -->
             <div id="modal1" class="modal">
                 <div class="modal-content">
-                    <h4></h4>
+                    <h5></h5>
                     <div id="modalBtnDiv">
                         <button id="read"
                             class="orange darken-4 z-depth-2 waves-effect waves-light hoverable">Read</button>

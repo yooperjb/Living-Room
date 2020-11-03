@@ -49,7 +49,7 @@ var getRandomBook = function () {
             }
 
             // create elements for displaying book info
-            var bookTitleEl = $("<h4>").text(bookTitle);
+            var bookTitleEl = $("<h4 class='middleH4'>").text(bookTitle);
             var bookAuthorEl = $("<p>").text("Author: " + bookAuthor);
             var bookSubjectEl = $("<p>").text(bookSubject);
 
@@ -95,14 +95,14 @@ var loadBooks = function () {
 
     // check content of books in localStorage
     books = JSON.parse(localStorage.getItem("books")) || {};
-    $("#bookshelf").empty();
+
     $("#bookshelf").html("<h4>Bookshelf</h4>");
     var bookListDivEl = $("<div>").attr("class", "collection");
 
     // create list item for each saved item
     $.each(books, function (key, value) {
 
-        var bookItemEl = $("<a>").text(key).attr({ class: "modal-trigger collection-item", href: "#modal1" });
+        var bookItemEl = $("<a>").text(key).attr({ class: "modal-trigger collection-item orange-text text-darken-3", href: "#modal1" });
         bookListDivEl.append(bookItemEl);
     })
     $("#bookshelf").append(bookListDivEl);
@@ -111,15 +111,15 @@ var loadBooks = function () {
 // open modal with book info
 $("#bookshelf").on("click", "a", function (event) {
     var text = $(this).text();
-    $("#modal1").find("h4").text(text);
+    $("#modal1").find("h5").text(text);
     $('.modal').modal();
     console.log(text);
 });
 
 // modal read button
 $("#read").on("click", function () {
-    // get book title from h4 element
-    var bookTitle = $(".modal-content").find("h4").text();
+    // get book title from h5 element
+    var bookTitle = $(".modal-content").find("h5").text();
 
     // get url from books obj
     var bookURL = books[bookTitle];
@@ -128,11 +128,13 @@ $("#read").on("click", function () {
 
 // modal remove button
 $("#remove").on("click", function () {
-    // get book title from h4 element
-    var bookTitle = $(".modal-content").find("h4").text();
+    // get book title from h5 element
+    var bookTitle = $(".modal-content").find("h5").text();
     // remove key in books object and save to localStorage
     delete books[bookTitle];
     localStorage.setItem("books", JSON.stringify(books));
     // reload books in library
     loadBooks();
 })
+
+loadBooks();

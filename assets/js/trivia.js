@@ -45,7 +45,7 @@ var showQuiz = function (trivia) {
 
     // set html data to trivia info
     $("#triviaHeader").show().html("Play Trivia!")
-    $("#score").html("<h4>Score: " + playerScore) + "</h4>";
+    $("#score").html("<h4 class='middleH4'>Score: " + playerScore) + "</h4>";
     $("#category").html("<h5>Category: " + triviaQuestion.category + "</h5>"
     );
     $("#difficulty").html("<h6>Difficulty: " + triviaQuestion.difficulty) + "</h6>";
@@ -78,7 +78,6 @@ $("#quizButtons").on("click", "button", function () {
     if (buttonClass === "correct") {
         $("#answerStatus").text("That is the correct answer!");
         playerScore++;
-        $("#score").html("<h4>Score: " + playerScore) + "</h4>";
         $("#quizButtons").empty();
 
     } // if incorrect answer is clicked

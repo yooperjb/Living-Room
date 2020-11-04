@@ -15,7 +15,7 @@ var startTrivia = function() {
     questionNumber = 1; //reset questionNumber
     playerScore = 0; // reset playerScore
     displayQuiz();
-    playTrivia();
+    fetchTrivia();
 };
 
 var displayQuiz = function(){
@@ -57,7 +57,7 @@ var displayQuiz = function(){
 };
 
 // fetch trivia api and pass results to showQuiz
-var playTrivia = function () {
+var fetchTrivia = function () {
     //console.log("PlayTriva run");
     fetch(`${api.base}?amount=3&type=multiple`)
         .then(response => response.json())
@@ -77,7 +77,6 @@ var showQuiz = function (trivia) {
     
     // get first trivia results object - this could be randomized 1-3
     var triviaQuestion = trivia.results[0]
-    //console.log("Results:", trivia.results[0]);
 
     // set html data to trivia info
     $("#triviaHeader").html("Play Trivia!");//.show()
@@ -87,12 +86,14 @@ var showQuiz = function (trivia) {
     $("#difficulty").html("<h6>Difficulty: " + triviaQuestion.difficulty) + "</h6>";
     $("#question").html("Question " + questionNumber + ":&nbsp;" + triviaQuestion.question);
 
-    // send trivia question to createAnserButtons
+    // send trivia question to createAnswerButtons
     createAnswerButtons(triviaQuestion);
 }  
 
+// create answer buttons
 var createAnswerButtons = function(question) {
     
+    // randomize where the correct button is
     var randomNum = Math.floor(Math.random() * 4 + 1);
     var incorrectIndex = 0;
     var correctAnswer = question.correct_answer;
@@ -144,17 +145,14 @@ var checkAnswer = function(answer,correct) {
     else {
       // run function to empty contents and runTrivia
         $("#next").text("Next Question").addClass("trivia-button orange darken-4 z-depth-2   waves-effect waves-light hoverable").show();
-        //next();
     }
 };
 
 var next = function() {
-    console.log("Next function ran");
+    
     $("#answerStatus").text("");
     $("#next").toggle();
-    
-    console.log("QuestionNumber: ", questionNumber);
-    playTrivia();
+    fetchTrivia();
 };
 
 // after last question is answered run endTrivia

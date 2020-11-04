@@ -276,3 +276,17 @@ section{
     border: none;
 }
 /* end joke styles */
+
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
+
+/* MEDIA QUERY FOR TABLETS AND SMALLER */
+
+/* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
+@media screen and (max-width: 575px) {
+    .welcome-banner h1 {
+        font-size: 30px;
+    }
+    .welcome-banner h2 {
+        font-size: 25px;
+    }
+}

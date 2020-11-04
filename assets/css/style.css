@@ -247,6 +247,11 @@ section{
     color:#812d12;
 }
 
+#joke-button-container {
+    display: flex;
+    justify-content: space-around;
+}
+
 .jokeButton{
     margin-top: 10px;
     width: 130px;

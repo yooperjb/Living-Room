@@ -5,13 +5,18 @@ const api = {
 var questionNumber = 1;
 var playerScore = 0;
 
-// When main Trivia button is clicked
+// When main Trivia button is clicked startTrivia
 $("#trivia-button").on("click", function () {
+    startTrivia();
+});
+
+var startTrivia = function() {
     $("#content-cell").empty();
     questionNumber = 1; //reset questionNumber
+    playerScore = 0; // reset playerScore
     displayQuiz();
     playTrivia();
-});
+};
 
 var displayQuiz = function(){
     var quizContainerEl = $("<div>").attr({ id: "quizContainer", class: "quiz" });
@@ -31,14 +36,19 @@ var displayQuiz = function(){
     
     var divButtonEl = $("<div>");
     var buttonNextEl = $("<button>").attr({ id: "next" }).hide().on("click", function(){next()});
-    var buttonQuitEl = $("<button>").text("Quit?").attr({ id: "quit" }).on("click", function () {
+    
+    var playAgainBtn = $("<button>").text("Play Again?").attr({id:"playAgain", class:"orange darken-4 z-depth-2 waves-effect waves-light hoverable trivia-button"}).on("click", function(){
+        startTrivia();
+    }).hide();
+    
+    var buttonQuitEl = $("<button>").text("Quit?").attr({ id: "quit", class: "orange darken-4 z-depth-2 waves-effect waves-light hoverable trivia-button" }).on("click", function () {
         $("#content-cell").empty()}).hide();
     
     // initials form elements
     var initialsFormEl = $("<form>").attr({ id: "initialsForm", class: "initialsform" });
     
     // putting buttons into div //
-    divButtonEl.append(buttonNextEl, buttonQuitEl);
+    divButtonEl.append(buttonNextEl,playAgainBtn, buttonQuitEl);
     
     // appending elements to quiz container //
     quizContainerEl.append(triviaHeaderEL, errorEl, scoreEl, categoryEl, difficultyEl, questionEl, quizButtonsEl, answerStatusEl, gameOverEl, divButtonEl, initialsFormEl);
@@ -161,7 +171,7 @@ var endTrivia = function(){
     $("#initialsForm").append(inputInitialsEl,buttonSubmitEl,pValidateEl).show();
 };
 
-// when initials button is clicked
+// when initials submit button is clicked
 var initialsForm = function() {
 
     var initials = $("#inputInitials").val();
@@ -197,14 +207,14 @@ var initialsForm = function() {
     $("#question").toggle();
 
     $("#divButtonEl").show();
-    $("#next").show();
+    $("#playAgain").show();
     $("#quit").show();
     
     // load new scores
     loadScores();
 };
 
-// when quit button is clicked - probably need to reset additional items
+// when quit button is clicked
 $("#quit").on("click", function() {
     $("#quizContainer").empty();
 })

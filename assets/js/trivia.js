@@ -7,34 +7,33 @@ $("#trivia-button").on("click", function () {
     // $("#sectionContainer").hide();
     // $("#quizContainer").show();
     var quizContainerEl = $("<div>").attr({ id: "quizContainer", class: "quiz" });
-    var triviaHeaderEL = $("<h4>").attr({ id: "triviaHeader" });
+    var triviaHeaderEL = $("<h4>").attr({ id: "triviaHeader", class: "middleH4" });
    
-    var errorEl = $("<p>").attr({ id: "error" });
-    var scoreEl = $("<p>").attr({ id: "score" });
-    var categoryEl = $("<p>").attr({ id: "category" });
-    var difficultyEl = $("<p>").attr({ id: "difficulty" });
+    var errorEl = $("<p>").attr({ id: "error" }).hide();
+    var scoreEl = $("<h5>").attr({ id: "score", class: "middleH5" });
+    var categoryEl = $("<h6>").attr({ id: "category", class: "quiz-category" });
+    var difficultyEl = $("<h6>").attr({ id: "difficulty", class: "quiz-category" });
     var questionEl = $("<p>").attr({ id: "question" });
     var quizButtonsEl = $("<div>").attr({ id: "quizButtons", class: "quiz-buttons" }).on("click", quizButtons ());
-    var divPEl = $("<div>").attr({ id: "divP" });
-    var answerStatusEl = $("<p>").attr({ id: "answerStatus" });
-    var gameOverEl = $("<p>").text("Game Over!").attr({ id: "gameOver" });
+    var answerStatusEl = $("<p>").attr({ id: "answerStatus", class: "answer-status" });
+    var gameOverEl = $("<p>").text("Game Over!").attr({ id: "gameOver" }).hide();
     var divButtonEl = $("<div>");
-    var buttonNextEl = $("<button>").attr({ id: "next" }).on("click", next());
+    var buttonNextEl = $("<button>").attr({ id: "next" }).on("click", next()).hide();
     var buttonQuitEl = $("<button>").text("Quit?").attr({ id: "quit" }).on("click", function () {
-        $("#content-cell").empty()});
-    var buttonSaveScoreEl = $("<button>").text("Save Score?").attr({ id: "saveScore" });
-    var initialsFormEl = $("<form>").attr({ id: "initialsForm" }).on("submit", initialsForm());
-    var pFormEl = $("<p>").text("Enter two initials please");
-    var inputInitialsEl = $("<input>").attr({ id: "inputInitials", name: "inputInitials", minlength: "2", maxlength: "2", type: "text" });
+        $("#content-cell").empty()}).hide();
+    
+    var initialsFormEl = $("<form>").attr({ id: "initialsForm", class: "initialsform" }).on("submit", initialsForm()).hide();
+    // var pFormEl = $("<p>").text("Enter two initials please");
+    var inputInitialsEl = $("<input>").attr({ id: "inputInitials", placeholder: "Two initials please", name: "inputInitials", minlength: "2", maxlength: "2", type: "text" });
     var buttonSubmitEl = $("<button>").text("Submit").attr({ id: "submit", class: "trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable" });
     var pValidateEl = $("<p>").attr({ id: "validate" });
     
-    // putting child into form //
-    initialsFormEl.append(pFormEl, inputInitialsEl, buttonSubmitEl, pValidateEl);
+        // putting child into form //
+    initialsFormEl.append(inputInitialsEl, buttonSubmitEl, pValidateEl);
     // putting buttons into div //
-    divButtonEl.append(buttonNextEl, buttonQuitEl, buttonSaveScoreEl);
+    divButtonEl.append(buttonNextEl, buttonQuitEl);
     // appending elements to quiz container //
-    quizContainerEl.append(triviaHeaderEL, errorEl, scoreEl, categoryEl, difficultyEl, questionEl, quizButtonsEl, divPEl, answerStatusEl, gameOverEl, divButtonEl, initialsFormEl);
+    quizContainerEl.append(triviaHeaderEL, errorEl, scoreEl, categoryEl, difficultyEl, questionEl, quizButtonsEl, answerStatusEl, gameOverEl, divButtonEl, initialsFormEl);
     
     $("#content-cell").append(quizContainerEl);
 
@@ -72,6 +71,7 @@ var showQuiz = function (trivia) {
 
     // get first trivia results object - this could be randomized 1-3
     var triviaQuestion = trivia.results[0]
+    console.log(trivia.results[0]);
 
     // set html data to trivia info
     $("#triviaHeader").show().html("Play Trivia!")
@@ -87,12 +87,12 @@ var showQuiz = function (trivia) {
     for (let i = 1; i < 5; i++) {
         // if random number = index assign button to correct answer
         if (i === randomNum) {
-            var answerBtn = $("<button>").html(triviaQuestion.correct_answer).addClass("correct orange darken-4 z-depth-2 waves-effect waves-light hoverable trivia-button");
+            var answerBtn = $("<button>").html(triviaQuestion.correct_answer).addClass("orange darken-4 z-depth-2 waves-effect waves-light hoverable trivia-button").attr("isCorrect", "yes");
         }
 
         // assign button to incorrect answer
         else {
-            var answerBtn = $("<button>").html(triviaQuestion.incorrect_answers[incorrectIndex]).addClass("incorrect orange darken-4 z-depth-2 waves-effect waves-light hoverable trivia-button");
+            var answerBtn = $("<button>").html(triviaQuestion.incorrect_answers[incorrectIndex]).addClass("orange darken-4 z-depth-2 waves-effect waves-light hoverable trivia-button").attr("isCorrect", "no");
             incorrectIndex++;
         }
         // append button to buttons div
@@ -105,6 +105,7 @@ var quizButtons = function () {
     var buttonClass = $(this).attr("class");
 
     // if correct answer is clicked
+    // if (buttonClass.search("correct")) {
     if (buttonClass === "correct") {
         $("#answerStatus").text("That is the correct answer!");
         playerScore++;

@@ -1,11 +1,14 @@
 var highScores = JSON.parse(localStorage.getItem("highScores")) || []
+const api = {
+    base: "https://opentdb.com/api.php",
+};
+var questionNumber = 1;
+var playerScore = 0;
 
+// When main Trivia button is clicked
 $("#trivia-button").on("click", function () {
-
     $("#content-cell").empty();
-    // $(".trivia-content").show();
-    // $("#sectionContainer").hide();
-    // $("#quizContainer").show();
+    questionNumber = 1; //reset questionNumber
     displayQuiz();
     playTrivia();
 });
@@ -16,6 +19,7 @@ var displayQuiz = function(){
    
     var errorEl = $("<p>").attr({ id: "error" }).hide();
     var scoreEl = $("<h5>").attr({ id: "score", class: "middleH5" });
+    
     var categoryEl = $("<h6>").attr({ id: "category", class: "quiz-category" });
     var difficultyEl = $("<h6>").attr({ id: "difficulty", class: "quiz-category" });
     var questionEl = $("<p>").attr({ id: "question" });
@@ -24,37 +28,27 @@ var displayQuiz = function(){
     
     var answerStatusEl = $("<p>").attr({ id: "answerStatus", class: "answer-status" });
     var gameOverEl = $("<p>").text("Game Over!").attr({ id: "gameOver" }).hide();
+    
     var divButtonEl = $("<div>");
     var buttonNextEl = $("<button>").attr({ id: "next" }).hide().on("click", function(){next()});
-    
     var buttonQuitEl = $("<button>").text("Quit?").attr({ id: "quit" }).on("click", function () {
         $("#content-cell").empty()}).hide();
     
-    var initialsFormEl = $("<form>").attr({ id: "initialsForm", class: "initialsform" }).on("submit", initialsForm()).hide();
-    // var pFormEl = $("<p>").text("Enter two initials please");
-    var inputInitialsEl = $("<input>").attr({ id: "inputInitials", placeholder: "Two initials please", name: "inputInitials", minlength: "2", maxlength: "2", type: "text" });
-    var buttonSubmitEl = $("<button>").text("Submit").attr({ id: "submit", class: "trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable" });
-    var pValidateEl = $("<p>").attr({ id: "validate" });
+    // initials form elements
+    var initialsFormEl = $("<form>").attr({ id: "initialsForm", class: "initialsform" });
     
-    // putting child into form //
-    initialsFormEl.append(inputInitialsEl, buttonSubmitEl, pValidateEl);
     // putting buttons into div //
     divButtonEl.append(buttonNextEl, buttonQuitEl);
+    
     // appending elements to quiz container //
     quizContainerEl.append(triviaHeaderEL, errorEl, scoreEl, categoryEl, difficultyEl, questionEl, quizButtonsEl, answerStatusEl, gameOverEl, divButtonEl, initialsFormEl);
     
     $("#content-cell").append(quizContainerEl);
 };
 
-questionNumber = 1;
-playerScore = 0;
-const api = {
-    base: "https://opentdb.com/api.php",
-};
-
 // fetch trivia api and pass results to showQuiz
 var playTrivia = function () {
-    console.log("PlayTriva run");
+    //console.log("PlayTriva run");
     fetch(`${api.base}?amount=3&type=multiple`)
         .then(response => response.json())
         .then(trivia => {
@@ -62,7 +56,7 @@ var playTrivia = function () {
             showQuiz(trivia);
         })
 
-        // if an error is caught - Display something to page here
+        // if an error is caught - Display something to page here - this needs to go to a function.
         .catch((error) => {
             error = $("#error").html("There is an error with the API.")
         });
@@ -70,46 +64,53 @@ var playTrivia = function () {
 
 // After successful fetch showQuiz
 var showQuiz = function (trivia) {
-    console.log("ShowQuiz ran");
-    JSON.stringify(trivia.results)
-
+    
     // get first trivia results object - this could be randomized 1-3
     var triviaQuestion = trivia.results[0]
-    console.log(trivia.results[0]);
+    //console.log("Results:", trivia.results[0]);
 
     // set html data to trivia info
-    $("#triviaHeader").show().html("Play Trivia!")
+    $("#triviaHeader").html("Play Trivia!");//.show()
     $("#score").html("<h4>Score: " + playerScore) + "</h4>";
     $("#category").html("<h5>Category: " + triviaQuestion.category + "</h5>"
     );
     $("#difficulty").html("<h6>Difficulty: " + triviaQuestion.difficulty) + "</h6>";
-    $("#question").html("<style='text-align:left'><b>Question " + questionNumber + ":&nbsp;" + triviaQuestion.question + "</b></style>");
+    $("#question").html("Question " + questionNumber + ":&nbsp;" + triviaQuestion.question);
 
+    // send trivia question to createAnserButtons
+    createAnswerButtons(triviaQuestion);
+}  
+
+var createAnswerButtons = function(question) {
+    
     var randomNum = Math.floor(Math.random() * 4 + 1);
     var incorrectIndex = 0;
-
+    var correctAnswer = question.correct_answer;
+    
     for (let i = 1; i < 5; i++) {
         // if random number = index assign button to correct answer
         if (i === randomNum) {
-            var answerBtn = $("<button>").html(triviaQuestion.correct_answer).addClass("orange darken-4 z-depth-2 waves-effect waves-light hoverable trivia-button").attr("isCorrect", "yes").on("click", function(){
-                quizButtons("yes");
+
+            var answerBtn = $("<button>").html(correctAnswer).addClass("orange darken-4 z-depth-2 waves-effect waves-light hoverable trivia-button").attr("isCorrect", "yes").on("click", function(){
+                checkAnswer("yes",correctAnswer);
             });
         }
 
         // assign button to incorrect answer
         else {
-            var answerBtn = $("<button>").html(triviaQuestion.incorrect_answers[incorrectIndex]).addClass("orange darken-4 z-depth-2 waves-effect waves-light hoverable trivia-button").attr("isCorrect", "no").on("click", function(){
-                quizButtons("no");
+
+            var answerBtn = $("<button>").html(question.incorrect_answers[incorrectIndex]).addClass("orange darken-4 z-depth-2 waves-effect waves-light hoverable trivia-button").attr("isCorrect", "no").on("click", function(){
+                checkAnswer("no",correctAnswer);
             });
             incorrectIndex++;
         }
         // append button to buttons div
         $("#quizButtons").append(answerBtn);
     }
-}
+};
 
 // When answer button is clicked check for answer
-var quizButtons = function (answer) {
+var checkAnswer = function(answer,correct) {
 
     // if correct answer is clicked
     if (answer === "yes") {
@@ -117,54 +118,55 @@ var quizButtons = function (answer) {
         playerScore++;
         $("#score").html("<h4>Score: " + playerScore) + "</h4>";
         $("#quizButtons").empty();
-        $("#next").show().text("Next Question").addClass("trivia-button orange darken-4 z-depth-2   waves-effect waves-light hoverable");
-
     } // if incorrect answer is clicked
     else {
-        $("#answerStatus").html("Nope, that is not the correct answer. The correct answer is: " + $(this).siblings(".correct").text());
+        $("#answerStatus").html("Nope, that is not the correct answer. The correct answer is: " + correct);
+        
+        // hide quiz buttons show next button
         $("#quizButtons").empty();
-        $("#next").show().text("Next Question").addClass("trivia-button orange darken-4 z-depth-2   waves-effect waves-light hoverable")
     }
-    
-    //Advance Question
+    //Advance Question Number
     questionNumber++;
-}
 
-var next = function () {
-    console.log("Next function ran");
-    $("#answerStatus").text("");
-    $("#next").hide();
-    $("#initialsForm").hide()
-    console.log("QuestionNumber: ", questionNumber);
-    if (questionNumber >= 4) {
-        playerScore = 0;
-        $("#score").html("<h4>Score: " + playerScore) + "</h4>";
-        questionNumber = 0;
-        //$("#next").text("Next Question").addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable")
-        $("#quit").hide();
+    if (questionNumber > 2) {
+        endTrivia();
     }
     else {
-      playTrivia();
+      // run function to empty contents and runTrivia
+        $("#next").text("Next Question").addClass("trivia-button orange darken-4 z-depth-2   waves-effect waves-light hoverable").show();
+        //next();
     }
 };
 
-// when quit button is clicked
-$("#quit").on("click", function () {
-     $("#quizContainer").hide();
- })
+var next = function() {
+    console.log("Next function ran");
+    $("#answerStatus").text("");
+    $("#next").toggle();
+    
+    console.log("QuestionNumber: ", questionNumber);
+    playTrivia();
+};
+
+// after last question is answered run endTrivia
+var endTrivia = function(){
+    
+    // create initial form elements
+    var inputInitialsEl = $("<input>").attr({ id: "inputInitials", placeholder: "Two initials please", name: "inputInitials", minlength: "2", maxlength: "2", type: "text" });
+    var buttonSubmitEl = $("<button>").text("Submit").attr({ id: "submit", class: "trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable" }).on("click", function(event){
+        event.preventDefault();
+        initialsForm()});
+    var pValidateEl = $("<p>").attr({ id: "validate" });
+    
+    // append initial form elements to initialsForm
+    $("#initialsForm").append(inputInitialsEl,buttonSubmitEl,pValidateEl).show();
+};
 
 // when initials button is clicked
-var initialsForm = function () {
-// $("#initialsForm").on("submit", function (event) {
-    // event.preventDefault();
+var initialsForm = function() {
 
-    var initials = $(this).children("input").val()
+    var initials = $("#inputInitials").val();
     var patt = new RegExp("^[a-zA-Z]+$");
     var res = patt.test(initials);
-
-    // $(document).ready(function () {
-    //     $('input#input_text, textarea#textarea2').characterCounter();
-    // });
 
     if (!initials || initials.length > 3 || !res) {
         $("#inputInitials").val("Please enter two letters.")
@@ -187,11 +189,25 @@ var initialsForm = function () {
     })
     highScores.splice(10)
     localStorage.setItem("highScores", JSON.stringify(highScores))
-    $("#initialsForm").hide()
-    $("#high-scores").show()
-    // $(highScores).removeData()
+    $("#initialsForm").toggle();
+    $("#high-scores").toggle();
+    $("#category").toggle();
+    $("#answerStatus").toggle();
+    $("#difficulty").toggle();
+    $("#question").toggle();
+
+    $("#divButtonEl").show();
+    $("#next").show();
+    $("#quit").show();
+    
+    // load new scores
     loadScores();
-}
+};
+
+// when quit button is clicked - probably need to reset additional items
+$("#quit").on("click", function() {
+    $("#quizContainer").empty();
+})
 
 // load High Scores from localStorage
 var loadScores = function () {

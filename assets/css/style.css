@@ -87,12 +87,15 @@ div#content-cell {
 .storage-div {
     height: auto;
 }
+#question {
+    text-align: left;
+    font-weight: bold;
+}
 
 .high-scores {
         display: flex; 
         justify-content: center; 
-        height: auto;
-        
+        height: auto;    
 }
 
 .clearscores {

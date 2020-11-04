@@ -220,8 +220,6 @@ section{
     width: 100%;
     padding: 50px 0;
     display: flex;
-    /* display: flex; */
-    /* visibility: hidden; */
     align-items: center;
     justify-content: center; 
 }
@@ -289,4 +287,20 @@ section{
     .welcome-banner h2 {
         font-size: 25px;
     }
+    .storage-div {
+        display: none;
+    }
+    #content-cell {
+        width: 100%;
+        display: block;
+    }
+    #high-scores h4 {
+        display: none;
+    }
+    /* #high-scores button {
+        display:  none;
+    }
+    #scoreDisplay {
+        display: none;
+    } */
 }

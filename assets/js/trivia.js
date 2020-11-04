@@ -25,7 +25,7 @@ var displayQuiz = function(){
     var answerStatusEl = $("<p>").attr({ id: "answerStatus", class: "answer-status" });
     var gameOverEl = $("<p>").text("Game Over!").attr({ id: "gameOver" }).hide();
     var divButtonEl = $("<div>");
-    var buttonNextEl = $("<button>").attr({ id: "next" }).hide();
+    var buttonNextEl = $("<button>").attr({ id: "next" }).hide().on("click", function(){next()});
     
     var buttonQuitEl = $("<button>").text("Quit?").attr({ id: "quit" }).on("click", function () {
         $("#content-cell").empty()}).hide();
@@ -117,35 +117,21 @@ var quizButtons = function (answer) {
         playerScore++;
         $("#score").html("<h4>Score: " + playerScore) + "</h4>";
         $("#quizButtons").empty();
+        $("#next").show().text("Next Question").addClass("trivia-button orange darken-4 z-depth-2   waves-effect waves-light hoverable");
 
     } // if incorrect answer is clicked
     else {
         $("#answerStatus").html("Nope, that is not the correct answer. The correct answer is: " + $(this).siblings(".correct").text());
         $("#quizButtons").empty();
+        $("#next").show().text("Next Question").addClass("trivia-button orange darken-4 z-depth-2   waves-effect waves-light hoverable")
     }
     
     //Advance Question
     questionNumber++;
-    
-    $("#next").show().text("Next Question").addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable").on("click", function(){ 
-        
-        next();
-        // if (questionNumber >= 4) {
-        // $("#initialsForm").show();
-        // $("#score").html("<h4>Score: " + playerScore) + "</h4>";
-        // $("#answerStatus").show();
-        // $("#next").text("Play again?").addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable");
-        // $("#quit").show().addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable");
-        // }
-        // else {
-        //     next();
-        // }
-    })  
-};
+}
 
-// 
 var next = function () {
-    
+    console.log("Next function ran");
     $("#answerStatus").text("");
     $("#next").hide();
     $("#initialsForm").hide()
@@ -154,7 +140,7 @@ var next = function () {
         playerScore = 0;
         $("#score").html("<h4>Score: " + playerScore) + "</h4>";
         questionNumber = 0;
-        $("#next").text("Next Question").addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable")
+        //$("#next").text("Next Question").addClass("trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable")
         $("#quit").hide();
     }
     else {

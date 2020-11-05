@@ -278,6 +278,11 @@ section{
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
 
 /* MEDIA QUERY FOR TABLETS AND SMALLER */
+@media screen and (max-width: 1025px) {
+    .storage-div h4 {
+        font-size: 25px;
+    }
+}
 
 /* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
 @media screen and (max-width: 575px) {

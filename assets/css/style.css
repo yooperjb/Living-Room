@@ -292,15 +292,5 @@ section{
     }
     #content-cell {
         width: 100%;
-        display: block;
     }
-    #high-scores h4 {
-        display: none;
-    }
-    /* #high-scores button {
-        display:  none;
-    }
-    #scoreDisplay {
-        display: none;
-    } */
 }

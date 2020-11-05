@@ -142,6 +142,8 @@ var checkAnswer = function (answer, correct) {
     questionNumber++;
 
     if (questionNumber > 10) {
+
+        $(gameOver).show();
         endTrivia();
     }
     else {

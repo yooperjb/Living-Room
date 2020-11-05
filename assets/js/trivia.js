@@ -139,7 +139,7 @@ var checkAnswer = function (answer, correct) {
     //Advance Question Number
     questionNumber++;
 
-    if (questionNumber > 2) {
+    if (questionNumber > 10) {
         endTrivia();
     }
     else {

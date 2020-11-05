@@ -128,6 +128,8 @@ var checkAnswer = function (answer, correct) {
     if (answer === "yes") {
         $("#answerStatus").text("That is the correct answer!");
         playerScore++;
+        $("#score").html("<h4>Score: " + playerScore) + "</h4>";
+
         $("#quizButtons").empty();
     } // if incorrect answer is clicked
     else {
@@ -140,6 +142,8 @@ var checkAnswer = function (answer, correct) {
     questionNumber++;
 
     if (questionNumber > 10) {
+
+        $(gameOver).show();
         endTrivia();
     }
     else {

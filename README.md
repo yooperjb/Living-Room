@@ -1,7 +1,8 @@
 # The Living Room
-![The Living Room](https://img.shields.io/github/languages/top/yooperjb/Living-Room)  ![GitHub language count](https://img.shields.io/github/languages/count/yooperjb/Living-Room)
+![The Living Room](https://img.shields.io/github/languages/top/yooperjb/Living-Room)  
+![GitHub language count](https://img.shields.io/github/languages/count/yooperjb/Living-Room)
 
-![Dashboard](./assets/images/front_page.jpg)
+![Dashboard](assets/images/Screenshot_lr.png)
 
 ## Description
 This is the results from our group project for UC Berekley Coding Bootcamp. The requirements were: must use at least two server-side APIs, must use a CSS framework other than Bootstrap, must use client-side storage, polished UI and mobile friendly, good quality coding standards, does not use alerts, confirms, or prompts, must be deployed on GitHub Pages, must be interactive.

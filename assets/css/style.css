@@ -128,8 +128,6 @@ h5 {
     font-weight: bold;
 }
 
-
-
 .quiz p {
     font-size: 20px;
     font-weight: 600;
@@ -222,7 +220,6 @@ p .initials {
 
 /* joke styles */
 section{
-    /* min-height: 90vh; */
     width: 100%;
     padding: 50px 0;
     display: flex;

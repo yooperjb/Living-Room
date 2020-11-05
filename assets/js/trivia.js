@@ -1,11 +1,11 @@
 var highScores = JSON.parse(localStorage.getItem("highScores")) || []
 
 $("#trivia-button").on("click", function () {
-
-    $("#content-cell").empty();
+    $('#trivia-button').attr("disabled", false);
+    // $("#content-cell").empty();
     // $(".trivia-content").show();
-    // $("#sectionContainer").hide();
-    // $("#quizContainer").show();
+    $("#sectionContainer").hide();
+    $("#quizContainer").show();
     var quizContainerEl = $("<div>").attr({ id: "quizContainer", class: "quiz" });
     var triviaHeaderEL = $("<h4>").attr({ id: "triviaHeader", class: "middleH4" });
    
@@ -19,8 +19,9 @@ $("#trivia-button").on("click", function () {
     var gameOverEl = $("<p>").text("Game Over!").attr({ id: "gameOver" }).hide();
     var divButtonEl = $("<div>");
     var buttonNextEl = $("<button>").attr({ id: "next" }).on("click", next()).hide();
-    var buttonQuitEl = $("<button>").text("Quit?").attr({ id: "quit" }).on("click", function () {
-        $("#content-cell").empty()}).hide();
+    var buttonQuitEl = $("<button>").text("Quit?").attr({ id: "quit" }).on("click", quit ()); 
+    // function () {
+        // $("#content-cell").empty()}).hide();
     
     var initialsFormEl = $("<form>").attr({ id: "initialsForm", class: "initialsform" }).on("submit", initialsForm()).hide();
     // var pFormEl = $("<p>").text("Enter two initials please");
@@ -142,7 +143,9 @@ var next = function () {
     }
     playTrivia();
 };
-
+var quit = function () {
+$('#trivia-button').attr("disabled", true);
+};
 // $("#quit").on("click", function () {
 //     $("#quizContainer").hide();
 // })

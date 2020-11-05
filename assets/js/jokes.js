@@ -13,6 +13,7 @@ var grabJoke = function () {
 // Joke activity to make it visible //
 $("#joke-button").on("click", function () {
     $("#content-cell").empty();
+    // $("#quizContainer").hide();
     var jokeContainerEl = $("<div>").attr({ id: "jokeContainer", class: "jokeContainer" });
     var sectionContainerEl = $("<section>").attr({ id: "sectionContainer", class: "custom-content" });
     var jokeTextEl = $("<p>").attr({ id: "fetchedJoke" });

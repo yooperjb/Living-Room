@@ -67,6 +67,8 @@ a {
 
 div#content-cell {
     min-height: 0;
+    overflow: hidden;
+
 }
 
 h1 {
@@ -120,6 +122,10 @@ h5 {
 /*Trivia Styles */
 .storage-div {
     height: auto;
+}
+#question {
+    text-align: left;
+    font-weight: bold;
 }
 
 

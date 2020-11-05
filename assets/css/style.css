@@ -1,26 +1,284 @@
-h1, .row {
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-image: url("../images/fireplace3.jpg");
+    background-size: cover;
+
+}
+
+/* header styles */
+.welcome-banner {
+    color: #fbe9e7;
+    background-color: #bf360c;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
     text-align: center;
 }
+/* end header styles */
 
-body::after {
-    content: "";
-    background: url(../images/fireplace.jpg);
+/* main parent grid styles */
+main {
+    
+    width: 100%;
+    min-height: 700px;
     background-size: cover;
-    opacity: 0.5;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;   
-  }
+    display: flex;
+}
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+/* end main parent grid styles */
 
+/* activity buttons */ 
+a {
+    font-weight: bold;
+}
+
+#content-row .col {
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+#content-row {
+    display: flex;
+}
+
+.storage-div li {
+    border-bottom: solid 1px #ffccbc;
+
+}
+
+/*Bookshelf Styles */
+.collection .collection-item {
+    border-bottom: 1px solid #ffe082 !important;
+}
+
+.collection a.collection-item:not(.active):hover {
+    background-color: #ffe082;
+}
+
+/*End Bookshelf styles */
+
+div#content-cell {
+    min-height: 0;
+    overflow: hidden;
+
+}
 
 h1 {
-    text-shadow: 0 10px 50px rgb(0, 0, 0);
-    color: white;
+    font-weight: 500;
 }
 
-#content-cell {
-    min-height: 0;
+h2 {
+
+    font-weight: 400;
 }
+
+h4 {
+    color: #ffb74d;
+    font-weight: 600;
+}
+
+h5 {
+    font-weight: 600;
+    color:#ef6c00;
+}
+
+.middleH4 {
+    color: #ef6c00;
+}
+
+
+/* Book Styles */
+#bookBtnDiv {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#bookBtnDiv button, #modalBtnDiv button{
+    margin: 10px 0px;
+    width: 130px;
+    padding: 15px;
+    font-size: 20px;
+    background-color: #9a3918;
+    color:white;
+    border-radius: 2%;
+    border: none;
+}
+
+.modal-content {
+    background-color:#f9aa4e;
+    border: solid #9a3918  2px;
+    
+}
+/* End Book Styles */
+
+/*Trivia Styles */
+.storage-div {
+    height: auto;
+}
+#question {
+    text-align: left;
+    font-weight: bold;
+}
+
+
+
+.quiz p {
+    font-size: 20px;
+    font-weight: 600;
+    color:#000;
+}
+
+p .answer-status {
+    color: #812d12;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.quiz h6 {
+    color: #812d12;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+#score h4 { 
+    color:#812d12;
+    font-weight: 200;
+}
+
+.high-scores {
+        display: flex; 
+        justify-content: center; 
+        height: auto;   
+}
+
+.clearscores {
+    color:white;
+    margin-top: 10px;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 2%;
+    border: none;
+    align-self: flex-end;
+    flex: 1;
+}
+
+.trivia-button {
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 15px;
+    font-size: 20px;
+    background-color: #9a3918;
+    color:white;
+    border-radius: 2%;
+    border: none;
+}
+
+.quiz-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.initialsform {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center; 
+    display: none;
+} 
+
+p .initials {
+    font-size: 10px;
+    color: #000;
+    font-style: italic;
+}
+
+  input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+    background-color: white !important;
+    border: 0 !important;
+    border-bottom: 0 !important;
+    box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01), 0px 0px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 2%;
+    outline: 2px solid orange !important;
+    height: 2rem !important;
+    width: 150px !important;
+    padding: 2px ;
+    text-align:center;
+}
+
+::placeholder {
+    color: #666;
+  }
+
+/* end trivia styles */
+
+/* joke styles */
+section{
+    /* min-height: 90vh; */
+    width: 100%;
+    padding: 50px 0;
+    display: flex;
+    /* display: flex; */
+    /* visibility: hidden; */
+    align-items: center;
+    justify-content: center; 
+}
+
+.jokeContainer{
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color:#f9aa4e;
+    padding: 10px;
+    align-self: flex-start;
+    flex-direction: column;
+    border: solid #9a3918  2px;
+    border-radius: 2%;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+.jokeContainer p{
+    font-size: 20px;
+    line-height: 25px;
+    min-height: 80px;
+    text-align: justify;
+    font-weight: 600;
+    color:#812d12;
+}
+
+#joke-button-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.jokeButton{
+    margin-top: 10px;
+    width: 130px;
+    padding: 15px;
+    font-size: 20px;
+    background-color: #9a3918;
+    color:white;
+    float: left;
+    border-radius: 2%;
+    border: none;
+}
+
+.closeJokeButton{
+    margin-top: 10px;
+    width: 130px;
+    padding: 15px;
+    font-size: 20px;
+    background-color:#9a3918;
+    color:white;
+    float: right;
+    border-radius: 2%;
+    border: none;
+}
+/* end joke styles */

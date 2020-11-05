@@ -96,7 +96,7 @@ var loadBooks = function () {
     // check content of books in localStorage
     books = JSON.parse(localStorage.getItem("books")) || {};
 
-    $("#bookshelf").html("<h4>Bookshelf</h4>");
+    $("#bookshelf").html("<h4>Bookshelf</h4> <p>READ to add to your bookshelf.</p>");
     var bookListDivEl = $("<div>").attr("class", "collection");
 
     // create list item for each saved item

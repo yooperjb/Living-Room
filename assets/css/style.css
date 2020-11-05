@@ -226,8 +226,6 @@ section{
     width: 100%;
     padding: 50px 0;
     display: flex;
-    /* display: flex; */
-    /* visibility: hidden; */
     align-items: center;
     justify-content: center; 
 }
@@ -282,3 +280,28 @@ section{
     border: none;
 }
 /* end joke styles */
+
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
+
+/* MEDIA QUERY FOR TABLETS AND SMALLER */
+@media screen and (max-width: 1060px) {
+    .storage-div h4 {
+        font-size: 25px;
+    }
+}
+
+/* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
+@media screen and (max-width: 700px) {
+    .welcome-banner h1 {
+        font-size: 30px;
+    }
+    .welcome-banner h2 {
+        font-size: 25px;
+    }
+    .storage-div {
+        display: none;
+    }
+    #content-cell {
+        width: 100%;
+    }
+}

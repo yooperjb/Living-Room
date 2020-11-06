@@ -70,7 +70,7 @@ div#content-cell {
     overflow: hidden;
 
 }
-#content-cell img {
+#content-cell .couch img {
     width: 90%;
 }
 

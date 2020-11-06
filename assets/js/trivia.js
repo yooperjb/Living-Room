@@ -141,7 +141,7 @@ var checkAnswer = function (answer, correct) {
     //Advance Question Number
     questionNumber++;
 
-    if (questionNumber > 10) {
+    if (questionNumber > 3) {
 
         $(gameOver).show();
         endTrivia();

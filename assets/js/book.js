@@ -5,7 +5,6 @@ $("#read-button").on("click", function () {
 
     // clear out div contents, loadbooks, getrandomBook
     $("#content-cell").empty();
-    //$("#sectionContainer").hide();
     loadBooks();
     getRandomBook();
 });

@@ -163,7 +163,9 @@ var next = function () {
 var endTrivia = function () {
 
     // create initial form elements
-    var inputInitialsEl = $("<input>").attr({ id: "inputInitials", placeholder: "Two initials please", name: "inputInitials", minlength: "2", maxlength: "2", type: "text" });
+    var inputInitialsEl = $("<input>").attr({ id: "inputInitials", placeholder: "Two initials please", name: "inputInitials", minlength: "2", maxlength: "2", type: "text" }).on("keyup", function () {
+        this.value = this.value.toUpperCase();
+    });
     var spacerEl = $("<br />")
     var buttonSubmitEl = $("<button>").text("Submit").attr({ id: "submit", class: "trivia-button orange darken-4 z-depth-2 waves-effect waves-light hoverable" }).on("click", function (event) {
         event.preventDefault();
@@ -179,11 +181,11 @@ var endTrivia = function () {
 var initialsForm = function () {
 
     var initials = $("#inputInitials").val();
-    var patt = new RegExp("^[a-zA-Z]+$");
+    var patt = new RegExp("^[A-Z]{2}$");
     var res = patt.test(initials);
 
-    if (!initials || initials.length > 3 || !res) {
-        $("#inputInitials").val("Initials only")
+    if (!res) {
+        $("#inputInitials").val("")
         return;
     }
 
